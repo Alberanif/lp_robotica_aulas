@@ -10,6 +10,7 @@ import metodologiaAulas from "@/assets/metodologia-aulas.png";
 import acompanhamentoIndividualizado from "@/assets/acompanhamento-individualizado.png";
 import formacaoIntegral from "@/assets/formacao-integral.png";
 import professoresApaixonados from "@/assets/professores-apaixonados.png";
+import parceriasFlexiveis from "@/assets/parcerias-flexiveis.png";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 const Institucional = () => {
   const [openDoor, setOpenDoor] = useState<number | null>(null);
@@ -300,6 +301,8 @@ const Institucional = () => {
                     <img src={acompanhamentoIndividualizado} alt="Acompanhamento individualizado" className="w-full h-full object-contain" />
                   ) : currentDifferential === 3 ? (
                     <img src={formacaoIntegral} alt="Formação integral" className="w-full h-full object-contain" />
+                  ) : currentDifferential === 4 ? (
+                    <img src={parceriasFlexiveis} alt="Parcerias flexíveis para cada tipo de ensino" className="w-full h-full object-contain" />
                   ) : currentDifferential === 5 ? (
                     <img src={professoresApaixonados} alt="Professores apaixonados" className="w-full h-full object-contain" />
                   ) : (
