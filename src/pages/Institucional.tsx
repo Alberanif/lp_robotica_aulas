@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronLeft, ChevronRight, ChevronDown, Sparkles, Brain, GraduationCap, Users, Cpu, Award } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronDown, Sparkles, Brain, GraduationCap, Users, Cpu, Award } from "lucide-react";
 import { useState } from "react";
 import AnimatedBackground from "@/components/landing/AnimatedBackground";
 import Footer from "@/components/landing/Footer";
@@ -115,7 +115,6 @@ const Institucional = () => {
 
             <Button size="lg" className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all animate-pulse" onClick={handleCTA}>
               Conheça Melhor a Robótica BSB
-              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </div>
@@ -217,6 +216,12 @@ const Institucional = () => {
             <p className="text-lg md:text-xl text-foreground/80 leading-relaxed mt-12 text-center max-w-4xl mx-auto">
               Cada degrau prepara o próximo. E quando a criança olha para trás, percebe o quanto cresceu, não só em conhecimento, mas em autonomia, criatividade e confiança.
             </p>
+
+            <div className="flex justify-center mt-12">
+              <Button size="lg" className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all" onClick={() => document.getElementById('valores-section')?.scrollIntoView({ behavior: 'smooth' })}>
+                Conheça Nossos Valores
+              </Button>
+            </div>
           </div>
         </div>
         
@@ -225,7 +230,7 @@ const Institucional = () => {
       </section>
 
       {/* Valores Section */}
-      <section className="relative py-20 bg-background">
+      <section id="valores-section" className="relative py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="font-fredoka text-4xl md:text-5xl font-bold mb-8 leading-tight text-center">
@@ -267,7 +272,6 @@ const Institucional = () => {
             <div className="flex justify-center mt-12">
               <Button size="lg" className="text-base md:text-lg px-4 py-4 md:px-8 md:py-6 shadow-lg hover:shadow-xl transition-all" onClick={handleCTA}>
                 Veja os Valores na Prática
-                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
           </div>
@@ -342,9 +346,12 @@ const Institucional = () => {
             </div>
 
             <div className="flex justify-center mt-12">
-              <Button size="lg" className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all" onClick={handleCTA}>
-                Seja Robótica BSB
-                <ArrowRight className="ml-2 h-5 w-5" />
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all bg-[hsl(142,70%,45%)] hover:bg-[hsl(142,70%,40%)] text-white" 
+                onClick={() => window.open('https://wa.me/5561991864835?text=Olá%21%20Eu%20quero%20saber%20mais%20sobre%20as%20aulas%20presenciais%20de%20robótica%21', '_blank')}
+              >
+                Agende Uma Apresentação
               </Button>
             </div>
           </div>
@@ -516,12 +523,6 @@ const Institucional = () => {
               </div>
             </div>
 
-            <div className="flex justify-center">
-              <Button size="lg" className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all" onClick={handleCTA}>
-                Veja como a Robótica BSB pode transformar a sua escola
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
           </div>
         </div>
         
@@ -558,9 +559,12 @@ const Institucional = () => {
               </p>
             </div>
 
-            <Button size="lg" className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all animate-pulse" onClick={handleCTA}>
-              Agendar uma apresentação
-              <ArrowRight className="ml-2 h-5 w-5" />
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all animate-pulse" 
+              onClick={() => window.open('https://wa.me/5561991864835?text=Olá%21%20Eu%20quero%20saber%20mais%20sobre%20as%20aulas%20presenciais%20de%20robótica%21', '_blank')}
+            >
+              Fale Conosco
             </Button>
           </div>
         </div>

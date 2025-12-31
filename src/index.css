@@ -42,6 +42,7 @@ All colors MUST be HSL.
     --lego-yellow: 45 90% 55%;
     --lego-red: 355 65% 55%;
     --lego-green: 130 50% 50%;
+    --whatsapp-green: 142 70% 45%;
     
     --gradient-hero: linear-gradient(135deg, hsl(210 100% 40%) 0%, hsl(210 100% 50%) 100%);
     --gradient-secondary: linear-gradient(135deg, hsl(130 60% 45%) 0%, hsl(140 60% 55%) 100%);
