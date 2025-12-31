@@ -154,24 +154,24 @@ All colors MUST be HSL.
     margin-top: 1rem;
     margin-bottom: 1rem;
 
-    --lego-arrow-red: hsl(355, 78%, 48%);
-    --lego-arrow-red-dark: hsl(355, 78%, 38%);
+    --lego-arrow-color: hsl(45, 90%, 55%);
+    --lego-arrow-color-dark: hsl(45, 90%, 40%);
     --lego-arrow-highlight: hsla(0, 0%, 100%, 0.6);
 
     --stud-pattern:
       radial-gradient(circle at 50% 50%, var(--lego-arrow-highlight) 5%, transparent 20%),
-      radial-gradient(circle at 50% 50%, var(--lego-arrow-red) 45%, var(--lego-arrow-red-dark) 55%, transparent 60%);
+      radial-gradient(circle at 50% 50%, var(--lego-arrow-color) 45%, var(--lego-arrow-color-dark) 55%, transparent 60%);
 
     animation: floatArrow 2s ease-in-out infinite;
   }
 
   .lego-block {
-    background-color: var(--lego-arrow-red);
+    background-color: var(--lego-arrow-color);
     background-image: var(--stud-pattern);
     background-size: 20px 20px;
     background-position: center center;
 
-    border: 1px solid var(--lego-arrow-red-dark);
+    border: 1px solid var(--lego-arrow-color-dark);
     box-shadow:
       inset 0 2px 4px var(--lego-arrow-highlight),
       inset 0 -3px 5px hsla(0, 0%, 0%, 0.4),
