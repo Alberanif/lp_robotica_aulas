@@ -145,4 +145,70 @@ All colors MUST be HSL.
   .animate-float {
     animation: float 3s ease-in-out infinite;
   }
+
+  /* --- LEGO Arrow Styles --- */
+  .lego-arrow-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    --lego-arrow-red: hsl(355, 78%, 48%);
+    --lego-arrow-red-dark: hsl(355, 78%, 38%);
+    --lego-arrow-highlight: hsla(0, 0%, 100%, 0.6);
+
+    --stud-pattern:
+      radial-gradient(circle at 50% 50%, var(--lego-arrow-highlight) 5%, transparent 20%),
+      radial-gradient(circle at 50% 50%, var(--lego-arrow-red) 45%, var(--lego-arrow-red-dark) 55%, transparent 60%);
+
+    animation: floatArrow 2s ease-in-out infinite;
+  }
+
+  .lego-block {
+    background-color: var(--lego-arrow-red);
+    background-image: var(--stud-pattern);
+    background-size: 20px 20px;
+    background-position: center center;
+
+    border: 1px solid var(--lego-arrow-red-dark);
+    box-shadow:
+      inset 0 2px 4px var(--lego-arrow-highlight),
+      inset 0 -3px 5px hsla(0, 0%, 0%, 0.4),
+      0 5px 10px hsla(0, 0%, 0%, 0.2);
+
+    border-radius: 4px;
+    margin-bottom: -4px;
+    position: relative;
+  }
+
+  .arrow-shaft {
+    width: 40px;
+    height: 50px;
+    z-index: 1;
+  }
+
+  .arrow-head-1 {
+    width: 90px;
+    height: 25px;
+    z-index: 2;
+  }
+
+  .arrow-head-2 {
+    width: 65px;
+    height: 25px;
+    z-index: 3;
+  }
+
+  .arrow-head-3 {
+    width: 40px;
+    height: 25px;
+    z-index: 4;
+    margin-bottom: 0;
+  }
+
+  @keyframes floatArrow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
 }
