@@ -11,6 +11,7 @@ import acompanhamentoIndividualizado from "@/assets/acompanhamento-individualiza
 import formacaoIntegral from "@/assets/formacao-integral.png";
 import professoresApaixonados from "@/assets/professores-apaixonados.png";
 import parceriasFlexiveis from "@/assets/parcerias-flexiveis.png";
+import materiaisLegoEducation from "@/assets/materiais-lego-education.png";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 const Institucional = () => {
   const [openDoor, setOpenDoor] = useState<number | null>(null);
@@ -297,6 +298,8 @@ const Institucional = () => {
                 <div className="rounded-xl mb-6 w-full aspect-[4/3] overflow-hidden bg-background flex items-center justify-center">
                   {currentDifferential === 0 ? (
                     <img src={metodologiaAulas} alt="Metodologia de ensino progressiva" className="w-full h-full object-contain" />
+                  ) : currentDifferential === 1 ? (
+                    <img src={materiaisLegoEducation} alt="Materiais LEGO® Education" className="w-full h-full object-contain" />
                   ) : currentDifferential === 2 ? (
                     <img src={acompanhamentoIndividualizado} alt="Acompanhamento individualizado" className="w-full h-full object-contain" />
                   ) : currentDifferential === 3 ? (
