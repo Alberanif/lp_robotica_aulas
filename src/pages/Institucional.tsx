@@ -349,7 +349,7 @@ const Institucional = () => {
               <Button 
                 size="lg" 
                 className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all bg-[hsl(142,70%,45%)] hover:bg-[hsl(142,70%,40%)] text-white" 
-                onClick={() => window.open('https://wa.me/5561991864835?text=Olá%21%20Eu%20quero%20saber%20mais%20sobre%20as%20aulas%20presenciais%20de%20robótica%21', '_blank')}
+                onClick={() => window.open('https://wa.me/5561991864835?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20Rob%C3%B3tica%20BSB', '_blank')}
               >
                 Agende Uma Apresentação
               </Button>
@@ -562,7 +562,7 @@ const Institucional = () => {
             <Button 
               size="lg" 
               className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all animate-pulse" 
-              onClick={() => window.open('https://wa.me/5561991864835?text=Olá%21%20Eu%20quero%20saber%20mais%20sobre%20as%20aulas%20presenciais%20de%20robótica%21', '_blank')}
+              onClick={() => window.open('https://wa.me/5561991864835?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20Rob%C3%B3tica%20BSB', '_blank')}
             >
               Fale Conosco
             </Button>
