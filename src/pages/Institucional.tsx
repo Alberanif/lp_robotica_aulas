@@ -4,7 +4,7 @@ import { useState } from "react";
 import AnimatedBackground from "@/components/landing/AnimatedBackground";
 import Footer from "@/components/landing/Footer";
 import professorLego from "@/assets/professor-lego.png";
-import setasTransicao from "@/assets/setas-transicao-coloridas.png";
+import LegoArrow from "@/components/landing/LegoArrow";
 import metodologiaEvolucao from "@/assets/metodologia-evolucao-recortada.png";
 import metodologiaAulas from "@/assets/metodologia-aulas.png";
 import acompanhamentoIndividualizado from "@/assets/acompanhamento-individualizado.png";
@@ -177,9 +177,9 @@ const Institucional = () => {
             </div>
           </div>
           
-          {/* Setas de transição - saindo da página pautada */}
+          {/* Seta LEGO de transição */}
           <div className="flex justify-center mt-4">
-            <img src={setasTransicao} alt="Setas de transição" className="w-48 h-24 md:w-64 md:h-32 lg:w-96 lg:h-48 opacity-90" />
+            <LegoArrow />
           </div>
         </div>
       </section>
