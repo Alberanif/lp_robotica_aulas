@@ -1,0 +1,31 @@
+@keyframes baterCarimbo {
+  0%   { opacity: 0; transform: scale(4) rotate(25deg); filter: blur(10px); }
+  50%  { opacity: 1; transform: scale(0.9) rotate(-4deg); filter: blur(0); }
+  75%  { transform: scale(1.05) rotate(-6deg); }
+  100% { opacity: 0.85; transform: scale(1) rotate(-5deg); }
+}
+
+@keyframes voarParticula {
+  0%   { opacity: 0.8; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+}
+
+.carimbo-stamp {
+  opacity: 0;
+  transform: scale(3) rotate(20deg);
+}
+
+.carimbo-stamp.animar {
+  animation: baterCarimbo 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.carimbo-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.carimbo-particle.animar {
+  animation: voarParticula 0.6s ease-out forwards;
+}
