@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * COMPONENTE: Calendário Animado (Páginas Passando)

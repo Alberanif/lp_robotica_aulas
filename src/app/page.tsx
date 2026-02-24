@@ -2,6 +2,7 @@ import HeroSection from "@/components/hero/HeroSection";
 import Header from "@/components/Header";
 import ScheduleSection from "@/components/schedule/ScheduleSection";
 import MetodologiaSection from "@/components/metodologia/MetodologiaSection";
+import LocationSection from "@/components/location/LocationSection";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <HeroSection />
         <ScheduleSection />
         <MetodologiaSection />
+        <LocationSection />
       </main>
     </div>
   );

@@ -1,70 +1,106 @@
-import React from "react";
-import { AnimatedCalendar } from "./AnimatedCalendar";
-import { StickyScroll } from "./StickyScroll";
-import Image from "next/image";
+"use client";
 
-/**
- * DADOS: Conteúdo dos Cards
- */
-const content = [
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatedCalendar } from "./AnimatedCalendar";
+
+const stackCardsData = [
     {
+        id: 1,
         title: "1 Encontro Semanal",
         description:
             "Toda semana o seu filho(a) terá a oportunidade de aprender uma nova habilidade e exercitar toda a imaginação e criatividade dele!",
-        content: (
-            <div className="h-full w-full relative">
-                <Image
-                    src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800"
-                    fill
-                    className="object-cover"
-                    alt="Robô ilustrativo"
-                />
-            </div>
-        ),
+        color: "#01a1e1",
+        img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800",
+        alt: "Robô ilustrativo",
     },
     {
+        id: 2,
         title: "Aulas de 1:00 hora de duração",
         description:
             "Aulas na medida certa! Cada aula tem a duração de 1:00 hora, para que todas as crianças consigam montar, programar e melhorar os seus projetos, sem ninguém ficar para trás.",
-        content: (
-            <div className="h-full w-full relative">
-                <Image
-                    src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800"
-                    fill
-                    className="object-cover"
-                    alt="Relógio e tempo de aula"
-                />
-            </div>
-        ),
+        color: "#f01600",
+        img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800",
+        alt: "Relógio e tempo de aula",
     },
     {
+        id: 3,
         title: "Turmas com até 6 crianças",
         description:
             "Nossas turmas reduzidas permitem que cada criança tenha uma atenção individual do professor, para que seja possível trabalhar e exercitar todos os pontos de melhora em cada aluno(a).",
-        content: (
-            <div className="h-full w-full relative">
-                <Image
-                    src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800"
-                    fill
-                    className="object-cover"
-                    alt="Crianças trabalhando juntas"
-                />
-            </div>
-        ),
+        color: "#45b227",
+        img: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800",
+        alt: "Crianças trabalhando juntas",
     },
 ];
 
-export default function ScheduleSection() {
+function NavButton({
+    direction,
+    onClick,
+    disabled,
+}: {
+    direction: "prev" | "next";
+    onClick: () => void;
+    disabled: boolean;
+}) {
+    const Icon = direction === "prev" ? ChevronLeft : ChevronRight;
     return (
-        <section className="w-full bg-brand-bg flex flex-col items-center pt-64 md:pt-[22rem] pb-20 px-4 md:px-10 font-body text-gray-900 border-t border-brand-dark/5 -mt-16">
+        <button
+            onClick={onClick}
+            disabled={disabled}
+            className="flex-shrink-0 w-[52px] h-[52px] rounded-full bg-white flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+            style={{
+                border: "4px solid #111111",
+                boxShadow: "4px 4px 0 #111111",
+            }}
+            onMouseEnter={(e) => {
+                if (!disabled) {
+                    (e.currentTarget as HTMLElement).style.boxShadow = "6px 6px 0 #111111";
+                }
+            }}
+            onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.boxShadow = "4px 4px 0 #111111";
+            }}
+        >
+            <Icon size={22} strokeWidth={3} color="#111111" />
+        </button>
+    );
+}
+
+export default function ScheduleSection() {
+    const [order, setOrder] = useState([0, 1, 2]);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const n = stackCardsData.length;
+    const activeColor = stackCardsData[order[0]].color;
+
+    const handleNext = () => {
+        if (isAnimating) return;
+        setIsAnimating(true);
+        setOrder((prev) => {
+            const [first, ...rest] = prev;
+            return [...rest, first];
+        });
+        setTimeout(() => setIsAnimating(false), 450);
+    };
+
+    const handlePrev = () => {
+        if (isAnimating) return;
+        setIsAnimating(true);
+        setOrder((prev) => {
+            const last = prev[prev.length - 1];
+            return [last, ...prev.slice(0, -1)];
+        });
+        setTimeout(() => setIsAnimating(false), 450);
+    };
+
+    return (
+        <section className="w-full bg-brand-bg flex flex-col items-center pt-48 sm:pt-56 md:pt-64 lg:pt-80 pb-20 font-body text-gray-900 border-t border-brand-dark/5">
 
             {/* Cabeçalho da Seção */}
-            <div className="max-w-4xl w-full mb-16 flex flex-col items-center text-center">
-
-                {/* Título Estilizado seguindo a paleta do Design System (hero-title-colored) */}
-                <h2
-                    className="hero-title-colored text-[2.7rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black mb-8 flex flex-wrap justify-center gap-x-4 gap-y-2 uppercase tracking-wide leading-none"
-                >
+            <div className="max-w-4xl w-full mb-16 flex flex-col items-center text-center px-4 md:px-10">
+                <h2 className="hero-title-colored text-[2.7rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black mb-8 flex flex-wrap justify-center gap-x-4 gap-y-2 uppercase tracking-wide leading-none">
                     <span className="split-char">Encontros</span>
                     <span className="split-char">Que</span>
                     <span className="split-char">Cabem</span>
@@ -73,31 +109,134 @@ export default function ScheduleSection() {
                 </h2>
 
                 <div className="flex flex-col items-center justify-center gap-6 mt-2">
-                    {/* Animação do Calendário entre título e texto */}
                     <div className="mb-2">
                         <AnimatedCalendar />
                     </div>
-
                     <p className="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-2xl font-medium leading-relaxed">
-                        Dia de semana, ou final de semana. Manhã ou Tarde. <span className="underline decoration-2 underline-offset-4 decoration-brand-blue/50 font-bold break-words">Você escolhe o melhor horário</span> que se encaixa na rotina.
+                        Dia de semana, ou final de semana. Manhã ou Tarde.{" "}
+                        <span className="underline decoration-2 underline-offset-4 decoration-brand-blue/50 font-bold break-words">
+                            Você escolhe o melhor horário
+                        </span>{" "}
+                        que se encaixa na rotina.
                     </p>
                 </div>
             </div>
 
-            {/* Seção do Scroll Reveal */}
-            <div className="max-w-6xl w-full flex flex-col items-center">
-                <StickyScroll content={content} />
-                <p className="text-gray-500 text-center mt-8 text-sm italic font-medium">
-                    Role a área acima para baixo para ver imagens mudarem.
-                </p>
+            {/* Deck + Botões (desktop) */}
+            <div className="flex items-center justify-center gap-4 md:gap-8 w-full max-w-6xl px-4">
 
-                <a
-                    href="#formulario-contato"
-                    className="mt-8 bg-[#45b227] hover:bg-green-600 text-white font-display font-bold text-center uppercase py-4 px-6 md:px-10 rounded-lg tracking-wide text-lg md:text-xl transition-all shadow-lg shadow-[#45b227]/30 hover:shadow-[#45b227]/50 hover:-translate-y-1"
+                {/* Botão ← (desktop) */}
+                <div className="hidden md:block">
+                    <NavButton direction="prev" onClick={handlePrev} disabled={isAnimating} />
+                </div>
+
+                {/* Stack de cards */}
+                <div
+                    className="relative flex-1 max-w-4xl"
+                    style={{ height: "clamp(300px, 45vw, 460px)" }}
                 >
-                    AGENDE UMA AULA<br className="block sm:hidden" /> EXPERIMENTAL
-                </a>
+                    {order.map((cardIndex, pos) => {
+                        const card = stackCardsData[cardIndex];
+                        return (
+                            <motion.div
+                                key={cardIndex}
+                                animate={{
+                                    y: pos * 14,
+                                    x: pos * 6,
+                                    scale: 1 - pos * 0.045,
+                                    zIndex: (n - pos) * 10,
+                                }}
+                                transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
+                                className="absolute inset-0"
+                            >
+                                <div
+                                    className="w-full h-full flex flex-col md:flex-row rounded-[2rem] border-[4px] border-brand-dark overflow-hidden"
+                                    style={{
+                                        backgroundColor: card.color,
+                                        boxShadow: "10px 10px 0px #111111",
+                                    }}
+                                >
+                                    {/* Coluna de Texto */}
+                                    <div className="w-full md:w-1/2 p-6 md:p-12 lg:p-16 flex flex-col justify-center">
+                                        <h3
+                                            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-black text-white mb-4 md:mb-6 uppercase leading-tight"
+                                            style={{ WebkitTextStroke: "1px #111111", paintOrder: "stroke fill" }}
+                                        >
+                                            {card.title}
+                                        </h3>
+                                        <p
+                                            className="text-white text-sm sm:text-base md:text-xl font-bold leading-relaxed"
+                                            style={{ textShadow: "0px 2px 4px rgba(0,0,0,0.4)" }}
+                                        >
+                                            {card.description}
+                                        </p>
+                                    </div>
+
+                                    {/* Coluna da Imagem */}
+                                    <div className="hidden md:block w-1/2 h-full border-l-[4px] border-brand-dark relative overflow-hidden group">
+                                        <Image
+                                            src={card.img}
+                                            alt={card.alt}
+                                            fill
+                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                        <div
+                                            className="absolute inset-0 mix-blend-multiply opacity-30 transition-opacity duration-500 group-hover:opacity-0"
+                                            style={{ backgroundColor: card.color }}
+                                        />
+                                    </div>
+                                </div>
+                            </motion.div>
+                        );
+                    })}
+                </div>
+
+                {/* Botão → (desktop) */}
+                <div className="hidden md:block">
+                    <NavButton direction="next" onClick={handleNext} disabled={isAnimating} />
+                </div>
             </div>
+
+            {/* Mobile: botões + dots */}
+            <div className="flex md:hidden items-center gap-6 mt-6">
+                <NavButton direction="prev" onClick={handlePrev} disabled={isAnimating} />
+
+                {/* Dots */}
+                <div className="flex items-center gap-2">
+                    {order.map((cardIndex, pos) => (
+                        <div
+                            key={cardIndex}
+                            className="w-3 h-3 rounded-full transition-colors duration-300"
+                            style={{
+                                backgroundColor: pos === 0 ? activeColor : "rgba(17,17,17,0.2)",
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <NavButton direction="next" onClick={handleNext} disabled={isAnimating} />
+            </div>
+
+            {/* Dots (desktop) */}
+            <div className="hidden md:flex items-center gap-2 mt-8">
+                {order.map((cardIndex, pos) => (
+                    <div
+                        key={cardIndex}
+                        className="w-3 h-3 rounded-full transition-colors duration-300"
+                        style={{
+                            backgroundColor: pos === 0 ? activeColor : "rgba(17,17,17,0.2)",
+                        }}
+                    />
+                ))}
+            </div>
+
+            {/* CTA */}
+            <a
+                href="#formulario-contato"
+                className="mt-12 bg-[#45b227] hover:bg-green-600 text-white font-display font-bold text-center uppercase py-4 px-6 md:px-10 rounded-lg tracking-wide text-lg md:text-xl transition-all shadow-lg shadow-[#45b227]/30 hover:shadow-[#45b227]/50 hover:-translate-y-1"
+            >
+                AGENDE UMA AULA<br className="block sm:hidden" /> EXPERIMENTAL
+            </a>
 
         </section>
     );

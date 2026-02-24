@@ -24,7 +24,8 @@ export default function Header() {
                         style={{
                             backgroundImage: "linear-gradient(110deg, #01a1e1 0%, #01a1e1 40%, #ffffff 50%, #01a1e1 60%, #01a1e1 100%)",
                             WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent"
+                            WebkitTextFillColor: "transparent",
+                            WebkitTextStroke: "0",
                         }}
                     >
                         Formando
@@ -34,7 +35,8 @@ export default function Header() {
                         style={{
                             backgroundImage: "linear-gradient(110deg, #f01600 0%, #f01600 40%, #ffffff 50%, #f01600 60%, #f01600 100%)",
                             WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent"
+                            WebkitTextFillColor: "transparent",
+                            WebkitTextStroke: "0",
                         }}
                     >
                         a
@@ -44,7 +46,8 @@ export default function Header() {
                         style={{
                             backgroundImage: "linear-gradient(110deg, #45b227 0%, #45b227 40%, #ffffff 50%, #45b227 60%, #45b227 100%)",
                             WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent"
+                            WebkitTextFillColor: "transparent",
+                            WebkitTextStroke: "0",
                         }}
                     >
                         Próxima
@@ -56,7 +59,8 @@ export default function Header() {
                             style={{
                                 backgroundImage: "linear-gradient(110deg, #ffd900 0%, #ffd900 40%, #ffffff 50%, #ffd900 60%, #ffd900 100%)",
                                 WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent"
+                                WebkitTextFillColor: "transparent",
+                                WebkitTextStroke: "0",
                             }}
                         >
                             Geração

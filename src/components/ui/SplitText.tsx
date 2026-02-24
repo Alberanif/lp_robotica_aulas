@@ -60,7 +60,7 @@ const SplitText = ({
       const el = ref.current as HTMLElement & { _rbsplitInstance?: InstanceType<typeof GSAPSplitText> };
 
       if (el._rbsplitInstance) {
-        try { el._rbsplitInstance.revert(); } catch (_) { /* noop */ }
+        try { el._rbsplitInstance.revert(); } catch { /* noop */ }
         el._rbsplitInstance = undefined;
       }
 
@@ -127,7 +127,7 @@ const SplitText = ({
         ScrollTrigger.getAll().forEach((st) => {
           if (st.trigger === el) st.kill();
         });
-        try { splitInstance.revert(); } catch (_) { /* noop */ }
+        try { splitInstance.revert(); } catch { /* noop */ }
         el._rbsplitInstance = undefined;
       };
     },
