@@ -47,7 +47,8 @@ const SplitText = ({
 
   useEffect(() => {
     if (document.fonts.status === "loaded") {
-      setFontsLoaded(true);
+      const t = setTimeout(() => setFontsLoaded(true), 0);
+      return () => clearTimeout(t);
     } else {
       document.fonts.ready.then(() => setFontsLoaded(true));
     }

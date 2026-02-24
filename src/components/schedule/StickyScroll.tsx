@@ -13,12 +13,12 @@ export const StickyScroll = ({
     content: {
         title: string;
         description: string;
-        content?: React.ReactNode | any;
+        content?: React.ReactNode;
     }[];
     contentClassName?: string;
 }) => {
     const [activeCard, setActiveCard] = useState(0);
-    const ref = useRef<any>(null);
+    const ref = useRef<HTMLDivElement>(null);
 
     // Agora ele acompanha o scroll natural (target: ref)
     const { scrollYProgress } = useScroll({

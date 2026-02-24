@@ -4,9 +4,23 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useInView, AnimatePresence, motion } from 'framer-motion';
 
 /**
+ * TIPOS
+ */
+type BalloonData = {
+  id: number;
+  label: string;
+  color: string;
+  description: string;
+  gridPosDesktop: { left: string; top: string };
+  gridPosMobile: { left: string; top: string };
+  orbitPos: { left: string; top: string };
+  animClass: string;
+};
+
+/**
  * DADOS: Configuração dos Balões de Aprendizado
  */
-const balloonsData = [
+const balloonsData: BalloonData[] = [
   {
     id: 1,
     label: "Starter",
@@ -52,7 +66,7 @@ const balloonsData = [
 /**
  * COMPONENTE: Balão Individual
  */
-const BalloonNode = ({ data, isOrganized, onClick }: { data: any, isOrganized: boolean, onClick: () => void }) => {
+const BalloonNode = ({ data, isOrganized, onClick }: { data: BalloonData, isOrganized: boolean, onClick: () => void }) => {
   return (
     <div
       className={`absolute z-20 balloon-pos cursor-pointer ${isOrganized ? 'organized' : 'disorganized'}`}
@@ -102,7 +116,7 @@ const BalloonNode = ({ data, isOrganized, onClick }: { data: any, isOrganized: b
 export default function MetodologiaSection() {
   const containerRef = useRef(null);
   const [isOrganized, setIsOrganized] = useState(false);
-  const [selectedNode, setSelectedNode] = useState<any | null>(null);
+  const [selectedNode, setSelectedNode] = useState<BalloonData | null>(null);
 
   const isInView = useInView(containerRef, { once: false, amount: 0.3 });
 
@@ -113,7 +127,8 @@ export default function MetodologiaSection() {
       }, 400);
       return () => clearTimeout(timer);
     } else {
-      setIsOrganized(false);
+      const reset = setTimeout(() => setIsOrganized(false), 0);
+      return () => clearTimeout(reset);
     }
   }, [isInView]);
 
