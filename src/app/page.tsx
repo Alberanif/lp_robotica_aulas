@@ -3,6 +3,8 @@ import Header from "@/components/Header";
 import ScheduleSection from "@/components/schedule/ScheduleSection";
 import MetodologiaSection from "@/components/metodologia/MetodologiaSection";
 import LocationSection from "@/components/location/LocationSection";
+import ContactCTASection from "@/components/contact/ContactCTASection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -12,8 +14,10 @@ export default function Home() {
         <HeroSection />
         <ScheduleSection />
         <MetodologiaSection />
+        <ContactCTASection />
         <LocationSection />
       </main>
+      <Footer />
     </div>
   );
 }

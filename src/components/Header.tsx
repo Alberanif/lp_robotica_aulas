@@ -1,5 +1,4 @@
 import Image from "next/image";
-import logo from "../../images/Logo - Robótica BSB.png";
 
 export default function Header() {
     return (
@@ -8,9 +7,11 @@ export default function Header() {
             {/* Logo à esquerda */}
             <div className="z-10 flex-shrink-0">
                 <Image
-                    src={logo}
+                    src="/images/Logo - Robótica BSB.svg"
                     alt="Logo Robótica BSB"
-                    className="h-[24px] min-[375px]:h-[30px] sm:h-[40px] md:h-[50px] lg:h-[70px] w-auto block"
+                    width={300}
+                    height={100}
+                    className="h-[32px] min-[375px]:h-[40px] sm:h-[48px] md:h-[56px] lg:h-[70px] w-auto block"
                     priority
                 />
             </div>
@@ -66,17 +67,13 @@ export default function Header() {
                             Geração
                         </span>
                         <div className="inline-flex items-center justify-center animate-rocket-land">
-                            <svg
-                                viewBox="0 0 24 24"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="w-[14px] h-[14px] min-[375px]:w-[16px] min-[375px]:h-[16px] sm:w-[20px] sm:h-[20px] md:w-[28px] md:h-[28px] lg:w-[42px] lg:h-[42px] stroke-[#111111] stroke-[2.5px] fill-transparent"
-                            >
-                                <path d="M12 2c-4 0-6 5-6 11s1 6 1 6h10s1-3 1-6-2-11-6-11z" />
-                                <path d="M7 11c-2 0-4 3-4 8 2 0 3-1 4-2" />
-                                <path d="M17 11c2 0 4 3 4 8-2 0-3-1-4-2" />
-                                <circle cx="12" cy="9" r="2.5" />
-                            </svg>
+                            <Image
+                                src="/images/Foguete.svg"
+                                alt="Foguete"
+                                width={42}
+                                height={42}
+                                className="w-[20px] h-[20px] min-[375px]:w-[24px] min-[375px]:h-[24px] sm:w-[32px] sm:h-[32px] md:w-[36px] md:h-[36px] lg:w-[42px] lg:h-[42px]"
+                            />
                         </div>
                     </div>
                 </h1>

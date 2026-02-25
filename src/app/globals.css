@@ -16,7 +16,7 @@
 
   /* Brand Typography */
   --font-display: var(--font-plus-jakarta-sans), system-ui, sans-serif;
-  --font-body: var(--font-montserrat), system-ui, sans-serif;
+  --font-body: var(--font-plus-jakarta-sans), system-ui, sans-serif;
 
   /* Brand Border Radius */
   --radius-hero: 2rem;

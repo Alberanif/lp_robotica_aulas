@@ -41,7 +41,7 @@ export default function HeroSubtitle() {
             textShadow: "2px 2px 0px rgba(240, 22, 0, 0.2)",
             boxShadow: "inset 0 0 8px rgba(240, 22, 0, 0.1), 0 0 8px rgba(240, 22, 0, 0.1)",
             display: "inline-block",
-            fontFamily: "Impact, Arial Black, var(--font-display), sans-serif",
+            fontFamily: "var(--font-body), sans-serif",
             letterSpacing: "0.05em",
           }}
         >

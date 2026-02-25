@@ -193,11 +193,11 @@ export default function MetodologiaSection() {
           <span className="split-char">Geração</span>
         </h2>
 
-        <p className="text-xl md:text-2xl lg:text-3xl text-gray-800 font-bold max-w-4xl mx-auto leading-relaxed px-2">
-          A nossa metodologia de ensino é composta por <span className="text-brand-red underline decoration-4 underline-offset-4">4 níveis de aprendizado</span>
+        <p className="text-xl md:text-2xl lg:text-3xl text-[#111111] font-bold max-w-4xl mx-auto leading-relaxed px-2">
+          A nossa metodologia de ensino é composta por <span className="text-white bg-[#f01600] px-3 py-1 rounded-md border-2 border-[#111111] shadow-[4px_4px_0px_#111111] inline-block -rotate-1 mx-1">4 níveis de aprendizado</span>
         </p>
 
-        <p className="text-gray-500 font-medium italic animate-pulse">
+        <p className="text-[#111111] font-medium italic animate-pulse">
           (Clique nos níveis abaixo para ver detalhes)
         </p>
       </div>
@@ -223,7 +223,7 @@ export default function MetodologiaSection() {
 
       {/* Texto de Conclusão da Seção */}
       <div className="max-w-4xl w-full text-center mt-12 md:mt-16 relative z-30 px-4">
-        <p className="text-lg md:text-2xl text-gray-700 font-medium leading-relaxed italic">
+        <p className="text-lg md:text-2xl text-[#111111] font-medium leading-relaxed italic">
           Cada etapa é como se fosse o degrau de uma escada, que a cada passo prepara o seu filho ainda mais para superar os desafios do futuro com segurança e inteligência.
         </p>
       </div>
@@ -275,7 +275,7 @@ export default function MetodologiaSection() {
                   Nível {selectedNode.label}
                 </h3>
 
-                <p className="text-lg md:text-xl text-gray-700 font-medium leading-relaxed">
+                <p className="text-lg md:text-xl text-[#111111] font-medium leading-relaxed">
                   {selectedNode.description}
                 </p>
 

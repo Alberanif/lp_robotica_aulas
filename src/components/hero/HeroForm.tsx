@@ -20,22 +20,63 @@ export default function HeroForm() {
 
   return (
     <div id="formulario-contato" className="bg-white rounded-card shadow-2xl p-6 md:p-8 flex flex-col gap-4">
+      <style>{`
+        .hero-botao-mvm {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 16px 20px;
+            width: 100%;
+            background-color: #45b227;
+            border: 3px solid #111111;
+            border-radius: 16px;
+            box-shadow: 5px 5px 0px #111111;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 800;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: var(--font-montserrat, 'Montserrat', sans-serif);
+        }
+
+        .hero-botao-mvm .button-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            text-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .hero-botao-mvm:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #111111;
+            filter: brightness(1.05);
+        }
+
+        .hero-botao-mvm:active {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0px #111111;
+        }
+      `}</style>
+
       <div>
-        <p className="font-display font-bold text-brand-dark text-xl md:text-2xl leading-tight">
-          Garanta a vaga do seu filho!
-        </p>
-        <p className="font-body text-gray-500 text-sm mt-1">
-          Preencha abaixo e entraremos em contato pelo WhatsApp.
+        <p className="font-display font-bold text-brand-dark text-xl md:text-2xl leading-tight text-center">
+          Traga seu filho para uma aula experimental e veja ele se apaixonar pelo aprender novas habilidades
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3 mt-2">
         <div className="flex flex-col gap-1">
           <label
             htmlFor="nome"
             className="font-body text-sm font-medium text-gray-700"
           >
-            Nome da criança
+            Nome do Responsável
           </label>
           <input
             id="nome"
@@ -53,7 +94,7 @@ export default function HeroForm() {
             htmlFor="celular"
             className="font-body text-sm font-medium text-gray-700"
           >
-            Celular / WhatsApp
+            Telefone/Whatsapp
           </label>
           <input
             id="celular"
@@ -66,16 +107,18 @@ export default function HeroForm() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="bg-brand-red hover:bg-red-700 text-white font-display font-bold uppercase py-4 rounded-lg tracking-wide text-base transition-colors mt-1 cursor-pointer"
-        >
-          Quero Garantir a Vaga!
-        </button>
+        <div className="mt-3 w-full">
+          <button
+            type="submit"
+            className="hero-botao-mvm"
+          >
+            <span className="button-content">Transformar o Futuro do Meu Filho</span>
+          </button>
+        </div>
       </form>
 
-      <p className="font-body text-xs text-gray-400 text-center">
-        Vagas limitadas. Sem compromisso.
+      <p className="font-body text-xs text-gray-400 text-center mt-2">
+
       </p>
     </div>
   );

@@ -43,7 +43,7 @@ const MapPin = ({ top, left, color, delay }: { top: string, left: string, color:
 
 export default function LocationSection() {
     return (
-        <section className="relative w-full min-h-screen bg-[#faefd9] font-sans py-20 overflow-hidden">
+        <section className="relative w-full min-h-screen bg-[#faefd9] font-body py-20 overflow-hidden">
 
             {/* 1. CABEÇALHO */}
             <div className="w-full max-w-5xl mx-auto px-4 md:px-8 flex flex-col items-center text-center">
@@ -53,7 +53,7 @@ export default function LocationSection() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="hero-title-colored text-[2.7rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2 uppercase tracking-wide leading-none"
+                    className="hero-title-colored text-[2rem] sm:text-[2.5rem] md:text-5xl lg:text-[4.2rem] font-display font-black mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2 uppercase tracking-wide leading-[1.1]"
                 >
                     <span className="split-char">Estamos</span>
                     <span className="split-char">mais</span>
@@ -71,7 +71,7 @@ export default function LocationSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
-                    className="text-lg md:text-2xl text-gray-800 font-bold max-w-3xl mx-auto leading-relaxed px-2"
+                    className="text-lg md:text-2xl text-[#111111] font-bold max-w-3xl mx-auto leading-relaxed px-2"
                 >
                     Acabamos de inaugurar a nossa nova unidade no centro de Brasília, pensando no seu conforto e na facilidade.
                 </motion.p>
@@ -117,8 +117,8 @@ export default function LocationSection() {
                 viewport={{ once: true }}
                 className="w-full max-w-4xl mx-auto mt-24 mb-12 px-4 text-center"
             >
-                <p className="text-xl md:text-3xl text-gray-800 font-black leading-relaxed">
-                    E estamos em uma <span className="text-white bg-[#45b227] px-3 py-1 rounded-md border-2 border-[#111111] shadow-[4px_4px_0px_#111111] inline-block -rotate-1">localização estratégica</span> para garantir a máxima proximidade da sua casa ou do seu trabalho.
+                <p className="text-xl md:text-3xl text-[#111111] font-black leading-relaxed">
+                    E estamos em uma <span className="text-white bg-[#45b227] px-3 py-1 rounded-md border-2 border-[#111111] shadow-[4px_4px_0px_#111111] inline-block -rotate-1 mx-1">localização estratégica</span> para garantir a máxima proximidade da sua casa ou do seu trabalho.
                 </p>
             </motion.div>
 
@@ -219,7 +219,7 @@ export default function LocationSection() {
                     {/* Interface flutuante simulando um App de mapa (Pointer-events-auto permite clicar) */}
                     <div className="absolute top-6 right-6 md:top-8 md:right-8 bg-white border-[3px] border-[#111111] p-4 rounded-xl shadow-[6px_6px_0px_#111111] max-w-[250px] z-30">
                         <h4 className="font-black text-[#111111] text-lg uppercase">Robótica BSB</h4>
-                        <p className="font-bold text-gray-600 text-sm mt-1">CLN 302 Bloco B, Sala 113<br />Asa Norte, Brasília DF</p>
+                        <p className="font-bold text-[#111111] text-sm mt-1">CLN 302 Bloco B, Sala 113<br />Asa Norte, Brasília DF</p>
                         <a
                             href="https://www.google.com/maps/place/Green's+Restaurante+Natural/@-15.7809878,-47.8861639,18.29z/data=!4m6!3m5!1s0x935a3ae1fec97839:0x37055d03058c2a2a!8m2!3d-15.7809045!4d-47.8850786!16s%2Fg%2F11b6hq76th?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D"
                             target="_blank"

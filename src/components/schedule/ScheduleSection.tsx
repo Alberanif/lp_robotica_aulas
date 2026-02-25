@@ -100,7 +100,7 @@ export default function ScheduleSection() {
 
             {/* Cabeçalho da Seção */}
             <div className="max-w-4xl w-full mb-16 flex flex-col items-center text-center px-4 md:px-10">
-                <h2 className="hero-title-colored text-[2.7rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black mb-8 flex flex-wrap justify-center gap-x-4 gap-y-2 uppercase tracking-wide leading-none">
+                <h2 className="hero-title-colored text-[2rem] sm:text-[2.5rem] md:text-5xl lg:text-[4.2rem] font-display font-black mb-8 flex flex-wrap justify-center gap-x-4 gap-y-2 uppercase tracking-wide leading-[1.1]">
                     <span className="split-char">Encontros</span>
                     <span className="split-char">Que</span>
                     <span className="split-char">Cabem</span>
@@ -112,9 +112,9 @@ export default function ScheduleSection() {
                     <div className="mb-2">
                         <AnimatedCalendar />
                     </div>
-                    <p className="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-2xl font-medium leading-relaxed">
+                    <p className="text-lg md:text-xl lg:text-2xl text-[#111111] max-w-2xl font-bold leading-relaxed">
                         Dia de semana, ou final de semana. Manhã ou Tarde.{" "}
-                        <span className="underline decoration-2 underline-offset-4 decoration-brand-blue/50 font-bold break-words">
+                        <span className="text-white bg-[#45b227] px-3 py-1 rounded-md border-2 border-[#111111] shadow-[4px_4px_0px_#111111] inline-block -rotate-1 mx-1">
                             Você escolhe o melhor horário
                         </span>{" "}
                         que se encaixa na rotina.
@@ -233,7 +233,13 @@ export default function ScheduleSection() {
             {/* CTA */}
             <a
                 href="#formulario-contato"
-                className="mt-12 bg-[#45b227] hover:bg-green-600 text-white font-display font-bold text-center uppercase py-4 px-6 md:px-10 rounded-lg tracking-wide text-lg md:text-xl transition-all shadow-lg shadow-[#45b227]/30 hover:shadow-[#45b227]/50 hover:-translate-y-1"
+                className="mt-12 group relative inline-flex items-center justify-center px-6 md:px-10 py-4 bg-[#45b227] text-white font-display font-black text-lg md:text-xl uppercase tracking-widest rounded-xl transition-all duration-200 active:shadow-none active:translate-y-1"
+                style={{
+                    border: "4px solid #111111",
+                    boxShadow: "4px 4px 0 #111111",
+                    WebkitTextStroke: "0.5px #111111",
+                    paintOrder: "stroke fill"
+                }}
             >
                 AGENDE UMA AULA<br className="block sm:hidden" /> EXPERIMENTAL
             </a>
