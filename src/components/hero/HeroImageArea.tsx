@@ -1,38 +1,19 @@
+import Image from "next/image";
 import HeroForm from "./HeroForm";
-
-function RobotPlaceholder() {
-  return (
-    <div className="flex flex-col items-center justify-center gap-3 text-white/40">
-      <svg
-        width="80"
-        height="80"
-        viewBox="0 0 80 80"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <rect x="20" y="24" width="40" height="32" rx="6" fill="currentColor" opacity="0.6" />
-        <rect x="30" y="16" width="20" height="12" rx="4" fill="currentColor" opacity="0.4" />
-        <circle cx="32" cy="38" r="5" fill="currentColor" opacity="0.8" />
-        <circle cx="48" cy="38" r="5" fill="currentColor" opacity="0.8" />
-        <rect x="34" y="50" width="12" height="3" rx="1.5" fill="currentColor" opacity="0.5" />
-        <rect x="10" y="32" width="10" height="4" rx="2" fill="currentColor" opacity="0.4" />
-        <rect x="60" y="32" width="10" height="4" rx="2" fill="currentColor" opacity="0.4" />
-        <rect x="28" y="56" width="6" height="12" rx="2" fill="currentColor" opacity="0.4" />
-        <rect x="46" y="56" width="6" height="12" rx="2" fill="currentColor" opacity="0.4" />
-        <circle cx="40" cy="16" r="3" fill="currentColor" opacity="0.6" />
-      </svg>
-      <span className="font-body text-sm">Imagem em breve</span>
-    </div>
-  );
-}
 
 export default function HeroImageArea() {
   return (
     <div className="relative w-full mt-8 md:mt-12 lg:mt-16">
-      {/* Image placeholder */}
-      <div className="relative w-full aspect-square sm:aspect-[4/3] md:aspect-[16/9] bg-brand-dark/10 rounded-image flex items-center justify-center overflow-hidden">
-        <RobotPlaceholder />
+      {/* Image Container */}
+      <div className="relative w-full aspect-square sm:aspect-[4/3] md:aspect-[16/9] bg-[#faefd9] rounded-image flex items-center justify-center overflow-hidden border-4 border-brand-dark shadow-[10px_10px_0px_#f01600]">
+        <Image
+          src="/images/hero-bg.png"
+          alt="Alunos da Robótica BSB"
+          fill
+          priority
+          className="object-cover object-left"
+        />
+        {/* Overlay sutil se necessário para leitura de algo, mas como o form flutua com background sólido não precisa obrigatoriamente */}
       </div>
 
       {/* Form floating over image */}

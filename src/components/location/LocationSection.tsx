@@ -233,6 +233,23 @@ export default function LocationSection() {
                 </motion.div>
             </div>
 
+            {/* 5. OBSERVAÇÃO / INSTRUÇÕES DE CHEGADA */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="w-full max-w-3xl mx-auto mt-12 px-4"
+            >
+                <div className="bg-white border-[3px] border-[#111111] p-5 md:p-6 rounded-2xl shadow-[6px_6px_0px_#111111] flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-5 rotate-[-1deg] hover:rotate-0 transition-transform">
+                    <div className="bg-[#ffd900] w-12 h-12 rounded-full border-2 border-[#111111] flex-shrink-0 flex items-center justify-center font-black text-[#111111] text-2xl shadow-[2px_2px_0px_#111111]">
+                        !
+                    </div>
+                    <p className="font-bold text-gray-700 text-[15px] md:text-lg leading-relaxed text-center md:text-left mt-2 md:mt-0">
+                        Nossa sala fica no mesmo prédio do restaurante Greens. A entrada é por uma porta de vidro que fica na parte de trás do prédio.
+                    </p>
+                </div>
+            </motion.div>
+
         </section>
     );
 }

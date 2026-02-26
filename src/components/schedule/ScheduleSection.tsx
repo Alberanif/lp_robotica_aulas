@@ -157,33 +157,19 @@ export default function ScheduleSection() {
                                     }}
                                 >
                                     {/* Coluna de Texto */}
-                                    <div className="w-full md:w-1/2 p-6 md:p-12 lg:p-16 flex flex-col justify-center">
+                                    <div className="w-full h-full p-6 md:p-12 lg:p-16 flex flex-col justify-center items-center text-center">
                                         <h3
-                                            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-black text-white mb-4 md:mb-6 uppercase leading-tight"
-                                            style={{ WebkitTextStroke: "1px #111111", paintOrder: "stroke fill" }}
+                                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-white mb-4 md:mb-6 uppercase leading-tight"
+                                            style={{ WebkitTextStroke: "1.5px #111111", paintOrder: "stroke fill" }}
                                         >
                                             {card.title}
                                         </h3>
                                         <p
-                                            className="text-white text-sm sm:text-base md:text-xl font-bold leading-relaxed"
+                                            className="text-white text-base sm:text-lg md:text-2xl font-bold leading-relaxed max-w-2xl"
                                             style={{ textShadow: "0px 2px 4px rgba(0,0,0,0.4)" }}
                                         >
                                             {card.description}
                                         </p>
-                                    </div>
-
-                                    {/* Coluna da Imagem */}
-                                    <div className="hidden md:block w-1/2 h-full border-l-[4px] border-brand-dark relative overflow-hidden group">
-                                        <Image
-                                            src={card.img}
-                                            alt={card.alt}
-                                            fill
-                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                        />
-                                        <div
-                                            className="absolute inset-0 mix-blend-multiply opacity-30 transition-opacity duration-500 group-hover:opacity-0"
-                                            style={{ backgroundColor: card.color }}
-                                        />
                                     </div>
                                 </div>
                             </motion.div>

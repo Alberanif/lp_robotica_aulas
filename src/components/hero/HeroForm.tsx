@@ -12,10 +12,39 @@ function maskPhone(value: string): string {
 export default function HeroForm() {
   const [nome, setNome] = useState("");
   const [celular, setCelular] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("Dados do formulário:", { nome, celular });
+    if (!nome || !celular) return;
+
+    setIsSubmitting(true);
+    setStatus("idle");
+
+    try {
+      const response = await fetch("/api/cadastro", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome, celular }),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setNome("");
+        setCelular("");
+
+        // Retorna ao estado inicial após 3 segundos
+        setTimeout(() => setStatus("idle"), 3000);
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error("Erro no envio:", error);
+      setStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -44,6 +73,13 @@ export default function HeroForm() {
             font-family: var(--font-montserrat, 'Montserrat', sans-serif);
         }
 
+        .hero-botao-mvm:disabled {
+            background-color: #a8d59d;
+            cursor: not-allowed;
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0px #111111;
+        }
+
         .hero-botao-mvm .button-content {
             display: flex;
             align-items: center;
@@ -52,13 +88,13 @@ export default function HeroForm() {
             text-shadow: 0px 1px 2px rgba(0,0,0,0.3);
         }
 
-        .hero-botao-mvm:hover {
+        .hero-botao-mvm:not(:disabled):hover {
             transform: translate(-2px, -2px);
             box-shadow: 7px 7px 0px #111111;
             filter: brightness(1.05);
         }
 
-        .hero-botao-mvm:active {
+        .hero-botao-mvm:not(:disabled):active {
             transform: translate(3px, 3px);
             box-shadow: 2px 2px 0px #111111;
         }
@@ -85,7 +121,8 @@ export default function HeroForm() {
             onChange={(e) => setNome(e.target.value)}
             placeholder="Ex: João Pedro"
             required
-            className="border border-gray-200 rounded-lg px-4 py-3 font-body text-brand-dark placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all"
+            disabled={isSubmitting}
+            className="border border-gray-200 rounded-lg px-4 py-3 font-body text-brand-dark placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all disabled:bg-gray-50"
           />
         </div>
 
@@ -103,7 +140,8 @@ export default function HeroForm() {
             onChange={(e) => setCelular(maskPhone(e.target.value))}
             placeholder="(61) 99999-9999"
             required
-            className="border border-gray-200 rounded-lg px-4 py-3 font-body text-brand-dark placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all"
+            disabled={isSubmitting}
+            className="border border-gray-200 rounded-lg px-4 py-3 font-body text-brand-dark placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent transition-all disabled:bg-gray-50"
           />
         </div>
 
@@ -111,15 +149,20 @@ export default function HeroForm() {
           <button
             type="submit"
             className="hero-botao-mvm"
+            disabled={isSubmitting}
           >
-            <span className="button-content">Transformar o Futuro do Meu Filho</span>
+            <span className="button-content">
+              {isSubmitting ? "Enviando..." : status === "success" ? "Enviado com sucesso!" : "Transformar o Futuro do Meu Filho"}
+            </span>
           </button>
         </div>
+
+        {status === "error" && (
+          <p className="text-red-500 font-body text-sm font-bold text-center mt-1">
+            Houve um erro ao enviar. Tente novamente!
+          </p>
+        )}
       </form>
-
-      <p className="font-body text-xs text-gray-400 text-center mt-2">
-
-      </p>
     </div>
   );
 }

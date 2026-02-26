@@ -20,13 +20,13 @@ export default function Footer() {
             <div className="max-w-6xl mx-auto flex flex-col items-center">
 
                 {/* Logo Principal do Footer */}
-                <div className="mb-8 p-4 bg-white rounded-2xl border-4 border-[#111111] shadow-[6px_6px_0px_#111111] rotate-[-2deg] transition-transform hover:rotate-0 inline-block">
+                <div className="mb-8 p-6 md:p-8 bg-white rounded-3xl md:rounded-[2rem] border-[4px] border-[#111111] shadow-[8px_8px_0px_#111111] rotate-[-2deg] transition-transform hover:rotate-0 inline-flex items-center justify-center min-w-[140px] min-h-[140px] md:min-w-[180px] md:min-h-[180px]">
                     <Image
                         src="/images/Logo - Robótica BSB.svg"
                         alt="Robótica BSB"
-                        width={220}
-                        height={60}
-                        className="h-12 md:h-16 w-auto"
+                        width={300}
+                        height={300}
+                        className="w-24 md:w-32 h-auto"
                     />
                 </div>
 
