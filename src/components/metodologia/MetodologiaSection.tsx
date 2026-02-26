@@ -182,8 +182,8 @@ export default function MetodologiaSection() {
       `}</style>
 
       {/* Cabeçalho da Seção */}
-      <div className="max-w-5xl w-full text-center mb-12 md:mb-20 space-y-8 relative z-30">
-        <h2 className="hero-title-colored text-[2rem] sm:text-[2.5rem] md:text-5xl lg:text-[4.2rem] font-display font-black leading-[1.1] flex flex-wrap justify-center gap-x-3 gap-y-2 uppercase tracking-wide">
+      <div className="max-w-5xl w-full text-center mb-12 md:mb-16 space-y-6 md:space-y-8 relative z-30">
+        <h2 className="hero-title-colored text-[2rem] sm:text-[2.5rem] md:text-5xl lg:text-[3.8rem] font-display font-black leading-[1.1] flex flex-wrap justify-center gap-x-3 gap-y-2 uppercase tracking-wide">
           <span className="split-char">Evolução</span>
           <span className="split-char">Pensada</span>
           <span className="split-char">No</span>
@@ -193,8 +193,8 @@ export default function MetodologiaSection() {
           <span className="split-char">Geração</span>
         </h2>
 
-        <p className="text-xl md:text-2xl lg:text-3xl text-[#111111] font-bold max-w-4xl mx-auto leading-relaxed px-2">
-          A nossa metodologia de ensino é composta por <span className="text-white bg-[#f01600] px-3 py-1 rounded-md border-2 border-[#111111] shadow-[4px_4px_0px_#111111] inline-block -rotate-1 mx-1">4 níveis de aprendizado</span>
+        <p className="text-xl md:text-2xl text-[#111111] font-bold max-w-4xl mx-auto leading-relaxed px-2">
+          A nossa metodologia de ensino é composta por <span className="text-white bg-[#f01600] px-3 py-1 rounded-md border-2 border-[#111111] shadow-[3px_3px_0px_#111111] inline-block -rotate-1 mx-1 lg:mx-2 whitespace-nowrap">4 níveis de aprendizado</span>
         </p>
 
         <p className="text-[#111111] font-medium italic animate-pulse">
@@ -205,7 +205,7 @@ export default function MetodologiaSection() {
       {/* Área Interativa da Escada de Balões */}
       <div
         ref={containerRef}
-        className="relative w-full max-w-5xl h-[550px] md:h-[650px] mx-auto rounded-[3rem] bg-gradient-to-tr from-white/30 to-brand-bg/5 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] overflow-visible flex-shrink-0"
+        className="relative w-full max-w-5xl h-[550px] mx-auto rounded-[3rem] bg-gradient-to-tr from-white/30 to-brand-bg/5 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.05)] overflow-visible flex-shrink-0"
       >
         {balloonsData.map((node) => (
           <BalloonNode

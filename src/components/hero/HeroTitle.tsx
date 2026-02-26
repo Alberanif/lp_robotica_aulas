@@ -8,7 +8,7 @@ export default function HeroTitle() {
       <SplitText
         text="Robótica BSB"
         tag="h1"
-        className="hero-title-colored font-display font-black text-[9vw] sm:text-[8vw] md:text-[5.5rem] lg:text-[6.5rem] xl:text-[7.5rem] whitespace-nowrap uppercase leading-none tracking-tight"
+        className="hero-title-colored font-display font-black text-[9vw] sm:text-[8vw] md:text-[4.5rem] lg:text-[5rem] xl:text-[5.5rem] whitespace-nowrap uppercase leading-none tracking-tight"
         delay={80}
         duration={0.6}
         ease="power3.out"

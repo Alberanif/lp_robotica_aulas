@@ -24,14 +24,14 @@ export default function HeroSubtitle() {
   }, []);
 
   return (
-    <div className="relative w-full flex items-center justify-center -mt-2 sm:-mt-4 md:-mt-8 mb-4 md:mb-6 z-30 pointer-events-none">
-      <div ref={containerRef} className="ml-0 sm:ml-0 md:ml-[40%] opacity-0">
+    <div className="relative w-full flex items-center justify-center -mt-2 sm:-mt-4 md:-mt-6 mb-4 md:mb-6 z-30 pointer-events-none">
+      <div ref={containerRef} className="ml-0 sm:ml-0 md:ml-[30%] opacity-0">
         <span
           style={{
             color: "#f01600",
             border: "4px solid #f01600",
             padding: "6px 20px",
-            fontSize: "clamp(1.25rem, 3vw, 2rem)",
+            fontSize: "clamp(1.25rem, 2.5vw, 1.6rem)",
             fontWeight: 900,
             textTransform: "uppercase",
             textAlign: "center",

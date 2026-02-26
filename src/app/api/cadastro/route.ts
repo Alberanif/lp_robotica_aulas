@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 
-// Esta rota de API roda apenas no lado do servidor (Server-Side), 
-// ocultando a URL real do Webhook do navegador do usuário.
-const WEBHOOK_URL = 'https://n8nwebhook.artificialmenteia.com/webhook/cadastro';
+// Pega a URL do webhoook configurada nas variáveis de ambiente da hospedagem
+const WEBHOOK_URL = process.env.WEBHOOK_URL || 'https://n8nwebhook.artificialmenteia.com/webhook/cadastro';
 
 export async function POST(request: Request) {
     try {

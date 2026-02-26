@@ -15,7 +15,7 @@ const WhatsAppIcon = () => (
 
 export default function ContactCTASection() {
     return (
-        <section className="w-full py-16 md:py-24 flex justify-center items-center relative z-10">
+        <section className="w-full py-16 md:py-20 flex justify-center items-center relative z-10">
             <style>{`
         .reflection-wrapper {
             position: relative;

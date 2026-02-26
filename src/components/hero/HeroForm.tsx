@@ -48,7 +48,7 @@ export default function HeroForm() {
   }
 
   return (
-    <div id="formulario-contato" className="bg-white rounded-card shadow-2xl p-6 md:p-8 flex flex-col gap-4">
+    <div id="formulario-contato" className="bg-white rounded-card shadow-2xl p-5 md:p-6 flex flex-col gap-4">
       <style>{`
         .hero-botao-mvm {
             display: flex;

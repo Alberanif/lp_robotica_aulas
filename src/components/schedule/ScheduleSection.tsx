@@ -96,11 +96,11 @@ export default function ScheduleSection() {
     };
 
     return (
-        <section className="w-full bg-brand-bg flex flex-col items-center pt-48 sm:pt-56 md:pt-64 lg:pt-80 pb-20 font-body text-gray-900 border-t border-brand-dark/5">
+        <section className="w-full bg-brand-bg flex flex-col items-center pt-32 sm:pt-40 md:pt-48 lg:pt-56 pb-20 font-body text-gray-900 border-t border-brand-dark/5">
 
             {/* Cabeçalho da Seção */}
-            <div className="max-w-4xl w-full mb-16 flex flex-col items-center text-center px-4 md:px-10">
-                <h2 className="hero-title-colored text-[2rem] sm:text-[2.5rem] md:text-5xl lg:text-[4.2rem] font-display font-black mb-8 flex flex-wrap justify-center gap-x-4 gap-y-2 uppercase tracking-wide leading-[1.1]">
+            <div className="max-w-4xl w-full mb-12 flex flex-col items-center text-center px-4 md:px-10">
+                <h2 className="hero-title-colored text-[2rem] sm:text-[2.5rem] md:text-5xl lg:text-[3.8rem] font-display font-black mb-8 flex flex-wrap justify-center gap-x-4 gap-y-2 uppercase tracking-wide leading-[1.1]">
                     <span className="split-char">Encontros</span>
                     <span className="split-char">Que</span>
                     <span className="split-char">Cabem</span>
@@ -112,9 +112,9 @@ export default function ScheduleSection() {
                     <div className="mb-2">
                         <AnimatedCalendar />
                     </div>
-                    <p className="text-lg md:text-xl lg:text-2xl text-[#111111] max-w-2xl font-bold leading-relaxed">
+                    <p className="text-lg md:text-xl text-[#111111] max-w-3xl font-bold leading-relaxed">
                         Dia de semana, ou final de semana. Manhã ou Tarde.{" "}
-                        <span className="text-white bg-[#45b227] px-3 py-1 rounded-md border-2 border-[#111111] shadow-[4px_4px_0px_#111111] inline-block -rotate-1 mx-1">
+                        <span className="text-white bg-[#45b227] px-3 py-1 rounded-md border-2 border-[#111111] shadow-[3px_3px_0px_#111111] inline-block -rotate-1 mx-1 lg:mx-2 whitespace-nowrap">
                             Você escolhe o melhor horário
                         </span>{" "}
                         que se encaixa na rotina.
@@ -157,15 +157,15 @@ export default function ScheduleSection() {
                                     }}
                                 >
                                     {/* Coluna de Texto */}
-                                    <div className="w-full h-full p-6 md:p-12 lg:p-16 flex flex-col justify-center items-center text-center">
+                                    <div className="w-full h-full p-6 md:p-10 lg:p-12 flex flex-col justify-center items-center text-center">
                                         <h3
-                                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-white mb-4 md:mb-6 uppercase leading-tight"
+                                            className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-display font-black text-white mb-4 md:mb-6 uppercase leading-tight"
                                             style={{ WebkitTextStroke: "1.5px #111111", paintOrder: "stroke fill" }}
                                         >
                                             {card.title}
                                         </h3>
                                         <p
-                                            className="text-white text-base sm:text-lg md:text-2xl font-bold leading-relaxed max-w-2xl"
+                                            className="text-white text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-relaxed max-w-2xl"
                                             style={{ textShadow: "0px 2px 4px rgba(0,0,0,0.4)" }}
                                         >
                                             {card.description}

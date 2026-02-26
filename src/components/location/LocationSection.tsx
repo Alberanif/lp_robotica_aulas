@@ -53,7 +53,7 @@ export default function LocationSection() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="hero-title-colored text-[2rem] sm:text-[2.5rem] md:text-5xl lg:text-[4.2rem] font-display font-black mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2 uppercase tracking-wide leading-[1.1]"
+                    className="hero-title-colored text-[2rem] sm:text-[2.5rem] md:text-5xl lg:text-[3.8rem] font-display font-black mb-6 flex flex-wrap justify-center gap-x-3 gap-y-2 uppercase tracking-wide leading-[1.1]"
                 >
                     <span className="split-char">Estamos</span>
                     <span className="split-char">mais</span>
@@ -128,7 +128,7 @@ export default function LocationSection() {
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="relative w-full h-[500px] md:h-[600px] bg-[#eef8fc] border-[4px] border-[#111111] rounded-[2rem] shadow-[15px_15px_0px_#f01600] overflow-hidden"
+                    className="relative w-full h-[500px] bg-[#eef8fc] border-[4px] border-[#111111] rounded-[2rem] shadow-[15px_15px_0px_#f01600] overflow-hidden"
                 >
                     {/* Malha de fundo (Grid pontilhado) */}
                     <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#111111 2px, transparent 2px)', backgroundSize: '30px 30px' }} />
