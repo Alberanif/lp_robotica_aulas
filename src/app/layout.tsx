@@ -45,11 +45,21 @@ export default function RootLayout({
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '1300747291461856');
+              fbq('init', '1199231115529690');
               fbq('track', 'PageView');
             `,
           }}
         />
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1199231115529690&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
       </head>
       <body
         className={`${plusJakartaSans.variable} ${montserrat.variable} antialiased`}
