@@ -99,7 +99,7 @@ export default function ContactCTASection() {
       `}</style>
 
             <div className="reflection-wrapper group">
-                <a href="https://wa.me/5561999999999" target="_blank" rel="noopener noreferrer" className="botao-mvm group">
+                <a href="https://wa.me/5561991864835?text=Ol%C3%A1!%20Eu%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20de%20rob%C3%B3tica" target="_blank" rel="noopener noreferrer" className="botao-mvm group">
                     <span className="button-content">
                         <WhatsAppIcon />
                         Entre em Contato
