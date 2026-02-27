@@ -34,6 +34,13 @@ export default function HeroForm() {
         setNome("");
         setCelular("");
 
+        if (typeof window !== 'undefined' && 'fbq' in window) {
+          const customWindow = window as unknown as { fbq?: (type: string, eventName: string) => void };
+          if (typeof customWindow.fbq === 'function') {
+            customWindow.fbq('track', 'CompleteRegistration');
+          }
+        }
+
         // Retorna ao estado inicial após 3 segundos
         setTimeout(() => setStatus("idle"), 3000);
       } else {
