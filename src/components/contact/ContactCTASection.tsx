@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 const WhatsAppIcon = () => (
     <svg
@@ -15,7 +16,7 @@ const WhatsAppIcon = () => (
 
 export default function ContactCTASection() {
     return (
-        <section className="w-full py-16 md:py-20 flex justify-center items-center relative z-10">
+        <section className="w-full py-8 md:py-12 flex flex-col justify-center items-center relative z-10 gap-6">
             <style>{`
         .reflection-wrapper {
             position: relative;
@@ -98,13 +99,32 @@ export default function ContactCTASection() {
         }
       `}</style>
 
-            <div className="reflection-wrapper group">
-                <a href="https://wa.me/5561991864835?text=Ol%C3%A1!%20Eu%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20de%20rob%C3%B3tica" target="_blank" rel="noopener noreferrer" className="botao-mvm group">
-                    <span className="button-content">
-                        <WhatsAppIcon />
-                        Entre em Contato
-                    </span>
-                </a>
+            <div className="flex flex-col items-center gap-4">
+                {/* Perfil do Professor Card */}
+                <div className="bg-white border-4 border-[#111111] shadow-[8px_8px_0px_#111111] rounded-[2rem] p-5 md:p-6 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 md:gap-6 max-w-xl w-full">
+                    <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-[4px] border-[#111111] shadow-[4px_4px_0px_#111111] shrink-0 bg-brand-bg mx-auto sm:mx-0">
+                        <Image
+                            src="/images/Emanuel.png"
+                            alt="Prof. Emanuel"
+                            fill
+                            className="object-cover object-[center_top] scale-110"
+                        />
+                    </div>
+                    <div className="flex flex-col justify-center flex-1 mt-1 sm:mt-0">
+                        <span className="font-display font-black text-[#111111] text-2xl md:text-3xl leading-none tracking-tight mb-1">Prof. Emanuel</span>
+                        <span className="font-body font-bold text-gray-600 text-xs md:text-sm uppercase tracking-widest leading-relaxed">Fundador da Robótica BSB</span>
+                    </div>
+                </div>
+
+                {/* Botão de Contato */}
+                <div className="reflection-wrapper group mt-2">
+                    <a href="https://wa.me/5561991864835?text=Ol%C3%A1!%20Eu%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20de%20rob%C3%B3tica" target="_blank" rel="noopener noreferrer" className="botao-mvm group">
+                        <span className="button-content">
+                            <WhatsAppIcon />
+                            Entre em Contato
+                        </span>
+                    </a>
+                </div>
             </div>
         </section>
     );
