@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Montserrat } from "next/font/google";
+import { Plus_Jakarta_Sans, Montserrat, Fredoka } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -13,6 +13,12 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
+});
+
+const fredoka = Fredoka({
+  variable: "--font-fredoka",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -62,7 +68,7 @@ export default function RootLayout({
         </noscript>
       </head>
       <body
-        className={`${plusJakartaSans.variable} ${montserrat.variable} antialiased`}
+        className={`${plusJakartaSans.variable} ${montserrat.variable} ${fredoka.variable} antialiased`}
       >
         {children}
       </body>
