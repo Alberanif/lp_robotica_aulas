@@ -7,11 +7,12 @@ export default function HeroImageArea() {
       {/* Image Container */}
       <div className="relative w-full aspect-[4/5] sm:aspect-[4/3] md:aspect-[21/9] bg-[#faefd9] rounded-image flex items-center justify-center overflow-hidden border-4 border-brand-dark shadow-[10px_10px_0px_#f01600]">
         <Image
-          src="/images/hero-bg.png"
+          src="/images/Elementos Vídeos.png"
           alt="Alunos da Robótica BSB"
           fill
           priority
-          className="object-cover object-left md:object-top"
+          className="object-cover"
+          style={{ objectPosition: '0% 20%' }}
         />
         {/* Overlay sutil se necessário para leitura de algo, mas como o form flutua com background sólido não precisa obrigatoriamente */}
       </div>

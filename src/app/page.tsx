@@ -4,6 +4,7 @@ import ScheduleSection from "@/components/schedule/ScheduleSection";
 import MetodologiaSection from "@/components/metodologia/MetodologiaSection";
 import LocationSection from "@/components/location/LocationSection";
 import ContactCTASection from "@/components/contact/ContactCTASection";
+import GaleriaAulasSection from "@/components/galeria/GaleriaAulasSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
         <ScheduleSection />
         <MetodologiaSection />
         <ContactCTASection />
+        <GaleriaAulasSection />
         <LocationSection />
       </main>
       <Footer />
