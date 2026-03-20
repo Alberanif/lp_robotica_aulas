@@ -8,41 +8,41 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 40 70% 92%;
-    --foreground: 215 25% 15%;
+    --background: 40 78% 91%;
+    --foreground: 0 0% 7%;
 
-    --card: 40 70% 92%;
-    --card-foreground: 215 25% 15%;
+    --card: 40 78% 91%;
+    --card-foreground: 0 0% 7%;
 
-    --popover: 40 70% 92%;
-    --popover-foreground: 215 25% 15%;
+    --popover: 40 78% 91%;
+    --popover-foreground: 0 0% 7%;
 
-    --primary: 210 100% 40%;
+    --primary: 198 99% 44%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 130 60% 45%;
+    --secondary: 105 64% 42%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 15% 45%;
+    --muted: 40 50% 85%;
+    --muted-foreground: 0 0% 35%;
 
-    --accent: 50 100% 50%;
-    --accent-foreground: 215 25% 15%;
+    --accent: 51 100% 50%;
+    --accent-foreground: 0 0% 7%;
 
-    --destructive: 355 78% 50%;
+    --destructive: 6 94% 47%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 20% 88%;
-    --input: 215 20% 88%;
-    --ring: 210 100% 40%;
+    --border: 0 0% 7%;
+    --input: 40 50% 80%;
+    --ring: 198 99% 44%;
 
     --radius: 0.75rem;
-    
-    --lego-blue: 210 70% 50%;
-    --lego-yellow: 45 90% 55%;
-    --lego-red: 355 65% 55%;
-    --lego-green: 130 50% 50%;
-    --whatsapp-green: 142 70% 45%;
+
+    --lego-blue: 198 99% 44%;
+    --lego-yellow: 51 100% 50%;
+    --lego-red: 6 94% 47%;
+    --lego-green: 105 64% 42%;
+    --whatsapp-green: 105 64% 42%;
     
     --gradient-hero: linear-gradient(135deg, hsl(210 100% 40%) 0%, hsl(210 100% 50%) 100%);
     --gradient-secondary: linear-gradient(135deg, hsl(130 60% 45%) 0%, hsl(140 60% 55%) 100%);
@@ -123,15 +123,52 @@ All colors MUST be HSL.
 
 @layer utilities {
   .text-stroke {
-    -webkit-text-stroke: 3px black;
-    text-stroke: 3px black;
+    -webkit-text-stroke: 4px #111111;
     paint-order: stroke fill;
   }
-  
+
   .text-stroke-sm {
-    -webkit-text-stroke: 2px black;
-    text-stroke: 2px black;
+    -webkit-text-stroke: 2px #111111;
     paint-order: stroke fill;
+  }
+
+  @media (max-width: 768px) {
+    .text-stroke {
+      -webkit-text-stroke: 2px #111111;
+    }
+  }
+
+  /* Neo-brutalista card */
+  .neo-card {
+    border: 3px solid #111111;
+    border-radius: 1rem;
+    box-shadow: 8px 8px 0px #111111;
+  }
+  .neo-card-blue  { box-shadow: 10px 10px 0px #01a1e1; }
+  .neo-card-yellow{ box-shadow: 10px 10px 0px #ffd900; }
+  .neo-card-red   { box-shadow: 10px 10px 0px #f01600; }
+  .neo-card-green { box-shadow: 10px 10px 0px #45b227; }
+
+  /* Inline highlight badge */
+  .highlight-badge {
+    display: inline-block;
+    background: #45b227;
+    color: white;
+    padding: 2px 12px;
+    border: 2px solid #111111;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 0px #111111;
+    font-weight: 700;
+  }
+
+  /* Tape effect */
+  .tape {
+    position: absolute;
+    width: 80px;
+    height: 24px;
+    background: rgba(255, 217, 0, 0.75);
+    border: 1px solid rgba(0,0,0,0.1);
+    transform: rotate(-3deg);
   }
 
   @keyframes float {
@@ -212,4 +249,18 @@ All colors MUST be HSL.
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(8px); }
   }
+
+  @keyframes stamp {
+    0%   { opacity: 0; transform: rotate(-8deg) scale(2.2); }
+    60%  { opacity: 1; transform: rotate(-3deg) scale(0.9); }
+    80%  { transform: rotate(-2.5deg) scale(1.05); }
+    100% { transform: rotate(-2deg) scale(1); }
+  }
+
+  .animate-stamp {
+    animation: stamp 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }

@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: ["./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
     container: {
@@ -16,7 +16,6 @@ export default {
       fontFamily: {
         'fredoka': ['Fredoka', 'sans-serif'],
         'sans': ['Inter', 'sans-serif'],
-        'handwriting': ['Caveat', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -57,6 +56,14 @@ export default {
           yellow: "hsl(var(--lego-yellow))",
           red: "hsl(var(--lego-red))",
           green: "hsl(var(--lego-green))",
+        },
+        brand: {
+          blue:   '#01a1e1',
+          yellow: '#ffd900',
+          red:    '#f01600',
+          green:  '#45b227',
+          bg:     '#faefd9',
+          dark:   '#111111',
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

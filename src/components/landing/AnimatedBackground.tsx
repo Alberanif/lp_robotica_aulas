@@ -10,15 +10,23 @@ const AnimatedBackground = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas size
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = document.documentElement.scrollHeight;
     };
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
 
-    // LEGO brick particles
+    const onResize = () => resizeCanvas();
+    window.addEventListener('resize', onResize, { passive: true });
+
+    const colors = [
+      'rgba(0, 101, 189, 0.08)',
+      'rgba(255, 215, 0, 0.08)',
+      'rgba(227, 37, 37, 0.08)',
+      'rgba(40, 167, 69, 0.08)',
+    ];
+
+    // Reduced from 30 to 10 particles
     const particles: Array<{
       x: number;
       y: number;
@@ -31,15 +39,7 @@ const AnimatedBackground = () => {
       opacity: number;
     }> = [];
 
-    const colors = [
-      'rgba(0, 101, 189, 0.08)',      // Blue
-      'rgba(255, 215, 0, 0.08)',      // Yellow
-      'rgba(227, 37, 37, 0.08)',      // Red
-      'rgba(40, 167, 69, 0.08)',      // Green
-    ];
-
-    // Create particles
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 10; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -53,7 +53,6 @@ const AnimatedBackground = () => {
       });
     }
 
-    // Draw LEGO brick
     const drawLegoBrick = (
       x: number,
       y: number,
@@ -67,19 +66,16 @@ const AnimatedBackground = () => {
       ctx.rotate(rotation);
       ctx.globalAlpha = opacity;
 
-      // Main brick body
       ctx.fillStyle = color;
       ctx.fillRect(-size / 2, -size / 3, size, size * 0.66);
 
-      // Studs (LEGO dots on top)
       const studSize = size * 0.15;
       const studSpacing = size * 0.35;
-      
+
       for (let row = 0; row < 2; row++) {
         for (let col = 0; col < 2; col++) {
           const studX = -size / 2 + studSpacing + col * studSpacing;
           const studY = -size / 3 - studSize / 2;
-          
           ctx.beginPath();
           ctx.arc(studX, studY, studSize, 0, Math.PI * 2);
           ctx.fill();
@@ -90,24 +86,28 @@ const AnimatedBackground = () => {
       ctx.restore();
     };
 
-    // Animation loop
+    // Throttled to ~30 FPS
     let animationId: number;
-    const animate = () => {
+    let lastTime = 0;
+
+    const animate = (timestamp: number) => {
+      animationId = requestAnimationFrame(animate);
+
+      if (timestamp - lastTime < 33) return; // ~30 FPS
+      lastTime = timestamp;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle) => {
-        // Update position
         particle.x += particle.speedX;
         particle.y += particle.speedY;
         particle.rotation += particle.rotationSpeed;
 
-        // Wrap around screen
         if (particle.x < -50) particle.x = canvas.width + 50;
         if (particle.x > canvas.width + 50) particle.x = -50;
         if (particle.y < -50) particle.y = canvas.height + 50;
         if (particle.y > canvas.height + 50) particle.y = -50;
 
-        // Draw particle
         drawLegoBrick(
           particle.x,
           particle.y,
@@ -117,14 +117,12 @@ const AnimatedBackground = () => {
           particle.opacity
         );
       });
-
-      animationId = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationId = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('resize', onResize);
       cancelAnimationFrame(animationId);
     };
   }, []);
