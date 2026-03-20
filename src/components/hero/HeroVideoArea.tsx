@@ -6,7 +6,7 @@ export default function HeroVideoArea() {
         <iframe
           width="100%"
           height="100%"
-          src="https://www.youtube.com/embed/oC9XI4Ja5IE?autoplay=1&mute=1"
+          src="https://www.youtube.com/embed/oC9XI4Ja5IE"
           title="Robótica BSB - Condomínios"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
