@@ -12,7 +12,6 @@ import professoresApaixonados from "@/assets/professores-apaixonados.webp";
 import parceriasFlexiveis from "@/assets/parcerias-flexiveis.webp";
 import materiaisLegoEducation from "@/assets/materiais-lego-education.webp";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import Header from "@/components/landing/Header";
 
 const NEO_BTN = "uppercase font-bold border-[3px] border-[#111111] rounded-2xl shadow-[4px_4px_0px_#111111] hover:-translate-y-[2px] hover:shadow-[6px_6px_0px_#111111] transition-[transform,box-shadow] duration-150 cursor-pointer";
 
@@ -162,54 +161,118 @@ const Institucional = () => {
   return (
     <div className="min-h-screen relative">
       <AnimatedBackground />
-      <Header />
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden bg-[#faefd9] pt-12 pb-16 md:pb-32">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
 
-            {/* Badge rotacionada */}
-            <div className="inline-block rotate-[-2deg] mb-6 bg-[#01a1e1] text-white uppercase font-bold text-base md:text-xl px-7 py-3 border-[3px] border-[#111111] rounded-xl shadow-[4px_4px_0px_#111111] animate-stamp">
-              Robótica BSB
-            </div>
-
-            <h1 className="font-fredoka text-4xl md:text-7xl font-bold mb-8 leading-tight">
-              <span className="text-[#01a1e1] text-stroke">Mais</span>{' '}
-              <span className="text-[#ffd900] text-stroke">do</span>{' '}
-              <span className="text-[#f01600] text-stroke">que</span>{' '}
-              <span className="text-[#45b227] text-stroke">robótica...</span>
-              <br />
-              <span className="text-[#f01600] text-stroke">Construímos</span>{' '}
-              <span className="text-[#01a1e1] text-stroke">mentes</span>{' '}
-              <span className="text-[#ffd900] text-stroke">criativas.</span>
+            {/* ROBÓTICA BSB — letras coloridas */}
+            <h1 className="flex flex-wrap justify-center gap-0 mb-2" aria-label="Robótica BSB">
+              {[
+                { char: "R", color: "#00A8FF" },
+                { char: "O", color: "#FBC531" },
+                { char: "B", color: "#E84118" },
+                { char: "Ó", color: "#4CD137" },
+                { char: "T", color: "#00A8FF" },
+                { char: "I", color: "#FBC531" },
+                { char: "C", color: "#E84118" },
+                { char: "A", color: "#4CD137" },
+                { char: " ", color: "" },
+                { char: "B", color: "#00A8FF" },
+                { char: "S", color: "#FBC531" },
+                { char: "B", color: "#E84118" },
+              ].map((l, i) =>
+                l.char === " " ? (
+                  <span key={i} className="inline-block w-3 sm:w-5 md:w-7" />
+                ) : (
+                  <span
+                    key={i}
+                    className="font-fredoka font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl leading-none text-stroke"
+                    style={{ color: l.color }}
+                  >
+                    {l.char}
+                  </span>
+                )
+              )}
             </h1>
 
-            <p className="text-xl md:text-2xl text-[#111111]/80 mb-8 font-medium">
-              Na Robótica BSB, cada aula é uma experiência prática, divertida e desafiadora, onde a criança aprende a pensar, criar e resolver problemas de verdade.
-            </p>
-
-            {/* Image placeholder */}
-            <div className="relative max-w-2xl mx-auto mb-8">
-              {/* Fita decorativa — oculta em mobile */}
-              <div className="tape hidden md:block -top-3 left-1/4 z-10" />
-              <div className="border-[4px] border-[#111111] rounded-2xl shadow-[12px_12px_0px_#01a1e1] overflow-hidden bg-[#fffef5]">
-                <div className="aspect-video flex items-center justify-center">
-                  <p className="text-[#111111]/40 font-bold text-lg">Espaço para imagem</p>
-                </div>
+            {/* NOS CONDOMÍNIOS — efeito carimbo */}
+            <div className="h-20 sm:h-24 md:h-28 flex items-center justify-center mb-8">
+              <div className="animate-stamp inline-block border-[5px] border-[#01a1e1] rounded-2xl md:rounded-3xl px-6 md:px-10 py-2 md:py-3 bg-white/50 backdrop-blur-sm">
+                <span className="font-fredoka font-bold uppercase tracking-wide text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                  <span style={{ color: "#FBC531" }}>Nos </span>
+                  <span style={{ color: "#4CD137" }}>Condomínios</span>
+                </span>
               </div>
             </div>
 
-            <p className="text-lg md:text-xl text-[#111111]/80 mb-12 max-w-3xl mx-auto">
-              Com a nossa metodologia própria baseada em valores humanos, nós ajudamos as escolas a formar alunos curiosos, confiantes e preparados para o futuro, ajudando-os a enxergar o mundo fora da caixa
-            </p>
+            {/* 3 destaques */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
+              {[
+                { text: "+ 500 Alunos",      border: "#01a1e1", dot: "#01a1e1" },
+                { text: "Metodologia Única", border: "#f01600", dot: "#f01600" },
+                { text: "Desde 2022",        border: "#45b227", dot: "#45b227" },
+              ].map((h) => (
+                <div
+                  key={h.text}
+                  className="bg-white rounded-full px-4 sm:px-5 py-2 flex items-center gap-2 font-semibold text-sm sm:text-base text-[#111] border-2"
+                  style={{ borderColor: h.border }}
+                >
+                  <span style={{ color: h.dot }}>✦</span>
+                  <span>{h.text}</span>
+                </div>
+              ))}
+            </div>
 
-            <button
-              className={`${NEO_BTN} bg-[#45b227] text-white text-lg px-8 py-4`}
-              onClick={scrollDown}
+            {/* Vídeo YouTube — estilo Shorts (9:16) */}
+            <div className="relative mx-auto mb-8 w-full max-w-[320px] sm:max-w-[360px]">
+              <div className="border-[4px] border-[#111111] rounded-[2rem] shadow-[12px_12px_0px_#01a1e1] overflow-hidden aspect-[9/16]">
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/oC9XI4Ja5IE"
+                  title="Robótica BSB - Condomínios"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+
+            {/* Card de contato */}
+            <div className="relative w-full max-w-[360px] mx-auto mt-16 mb-4">
+              {/* Avatar */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                <div className="w-20 h-20 rounded-full border-[4px] border-[#ffd900] overflow-hidden bg-[#faefd9] shadow-lg">
+                  <img
+                    src="/images/Emanuel.png"
+                    alt="Prof. Emanuel"
+                    className="w-full h-full object-cover object-top scale-110"
+                  />
+                </div>
+              </div>
+              {/* Card body */}
+              <div className="bg-white border-[6px] border-[#01a1e1] rounded-[1.5rem] pt-12 pb-6 px-6 text-center shadow-md">
+                <p className="font-bold text-[#111111] text-lg leading-tight mb-1">
+                  Robótica BSB | Prof. Emanuel
+                </p>
+                <p className="text-gray-400 text-sm">WhatsApp business account</p>
+              </div>
+            </div>
+
+            {/* Botão WhatsApp */}
+            <a
+              href="https://api.whatsapp.com/send/?phone=5561991864835&text=Ol%C3%A1%21+Eu+gostaria+de+saber+mais+sobre+as+aulas+de+rob%C3%B3tica&type=phone_number&app_absent=0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-[#1a4731] hover:bg-[#1f5a3d] text-white font-semibold text-lg px-8 py-4 rounded-full transition-colors duration-200 mt-2 mb-4"
             >
-              Conheça Melhor a Robótica BSB
-            </button>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Falar no WhatsApp
+            </a>
           </div>
         </div>
       </section>
@@ -425,7 +488,7 @@ const Institucional = () => {
               {/* Card */}
               <div className="border-[4px] border-[#111111] rounded-2xl shadow-[14px_14px_0px_#01a1e1] bg-white p-8 md:p-12 min-h-[520px] flex flex-col">
                 {/* Imagem */}
-                <div className="rounded-xl mb-6 w-full aspect-[4/3] overflow-hidden border-[3px] border-[#111111] flex items-center justify-center bg-[#faefd9]">
+                <div className="relative rounded-xl mb-6 w-full aspect-[4/3] overflow-hidden border-[3px] border-[#111111] flex items-center justify-center bg-[#faefd9]">
                   {currentDifferential === 0 ? (
                     <img src={metodologiaAulas} alt="Metodologia de ensino progressiva" className="w-full h-full object-contain" loading="lazy" decoding="async" />
                   ) : currentDifferential === 1 ? (
@@ -439,6 +502,24 @@ const Institucional = () => {
                   ) : (
                     <img src={professoresApaixonados} alt="Professores apaixonados" className="w-full h-full object-contain" loading="lazy" decoding="async" />
                   )}
+
+                  {/* Botão Prev */}
+                  <button
+                    onClick={prevDifferential}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] hover:shadow-[6px_6px_0px_#111111] rounded-full p-3 bg-[#ffd900] transition-all"
+                    aria-label="Anterior"
+                  >
+                    <ChevronLeft className="h-6 w-6 text-[#111111]" />
+                  </button>
+
+                  {/* Botão Next */}
+                  <button
+                    onClick={nextDifferential}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] hover:shadow-[6px_6px_0px_#111111] rounded-full p-3 bg-[#ffd900] transition-all"
+                    aria-label="Próximo"
+                  >
+                    <ChevronRight className="h-6 w-6 text-[#111111]" />
+                  </button>
                 </div>
 
                 <div className="flex-1">
@@ -468,23 +549,6 @@ const Institucional = () => {
                 </div>
               </div>
 
-              {/* Botão Prev */}
-              <button
-                onClick={prevDifferential}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] hover:-translate-y-[calc(50%+2px)] hover:shadow-[6px_6px_0px_#111111] rounded-full p-3 md:p-4 bg-[#ffd900] transition-all"
-                aria-label="Anterior"
-              >
-                <ChevronLeft className="h-6 w-6 md:h-8 md:w-8 text-[#111111]" />
-              </button>
-
-              {/* Botão Next */}
-              <button
-                onClick={nextDifferential}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 border-[3px] border-[#111111] shadow-[4px_4px_0px_#111111] hover:-translate-y-[calc(50%-2px)] hover:shadow-[6px_6px_0px_#111111] rounded-full p-3 md:p-4 bg-[#ffd900] transition-all"
-                aria-label="Próximo"
-              >
-                <ChevronRight className="h-6 w-6 md:h-8 md:w-8 text-[#111111]" />
-              </button>
             </div>
 
             <div className="flex justify-center mt-12">
@@ -499,113 +563,7 @@ const Institucional = () => {
         </div>
       </section>
 
-      {/* ── Impacto nas Escolas ── */}
-      <section className="relative py-20 bg-[#faefd9]">
-        <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="font-fredoka text-4xl md:text-5xl font-bold mb-8 leading-tight text-center">
-              <span className="text-[#01a1e1] text-stroke">O</span>{' '}
-              <span className="text-[#f01600] text-stroke">impacto</span>{' '}
-              <span className="text-[#ffd900] text-stroke">nas</span>{' '}
-              <span className="text-[#45b227] text-stroke">escolas</span>
-            </h2>
 
-            <p className="text-xl md:text-2xl text-[#111111]/90 mb-12 font-medium leading-relaxed text-center max-w-4xl mx-auto">
-              Quando a robótica deixa de ser uma atividade e se torna parte da cultura da escola, tudo muda.
-            </p>
-
-            <h3 className="font-fredoka text-2xl md:text-3xl font-bold mb-8 text-center text-[#111111]">
-              Como a Robótica BSB transforma o ambiente escolar
-            </h3>
-
-            <div className="space-y-6 mb-12">
-              {impactos.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={index}
-                    className="border-[3px] border-[#111111] rounded-2xl bg-white p-6 md:p-8"
-                    style={{ boxShadow: `6px 6px 0px ${item.color}` }}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div
-                        className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-full border-[3px] border-[#111111] flex items-center justify-center"
-                        style={{ backgroundColor: item.color, boxShadow: '3px 3px 0px #111111' }}
-                      >
-                        <Icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-fredoka text-xl md:text-2xl font-bold mb-4" style={{ color: item.color }}>
-                          {item.title}
-                        </h4>
-                        {item.content}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Resultado */}
-            <div className="border-[4px] border-[#111111] rounded-2xl shadow-[10px_10px_0px_#ffd900] bg-white p-8 md:p-10 mb-12">
-              <p className="font-fredoka text-2xl md:text-3xl font-bold mb-6 text-center text-[#111111]">
-                O resultado é simples:
-              </p>
-              <div className="space-y-3 text-lg md:text-xl text-[#111111]/80 leading-relaxed">
-                {[
-                  "Alunos mais confiantes.",
-                  "Professores com uma metodologia que funciona.",
-                  "Pais que sentem orgulho.",
-                  "E uma escola que se posiciona como referência em inovação e formação integral.",
-                ].map((line) => (
-                  <p key={line} className="flex items-start gap-2">
-                    <span className="highlight-badge mt-1">✓</span>
-                    <span>{line}</span>
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA Final ── */}
-      <section className="relative py-20 bg-[#faefd9]">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-fredoka text-4xl md:text-5xl font-bold mb-8 leading-tight">
-              <span className="text-[#01a1e1] text-stroke">Vamos</span>{' '}
-              <span className="text-[#f01600] text-stroke">construir</span>{' '}
-              <span className="text-[#ffd900] text-stroke">o</span>{' '}
-              <span className="text-[#45b227] text-stroke">próximo</span>{' '}
-              <span className="text-[#01a1e1] text-stroke">passo</span>{' '}
-              <span className="text-[#f01600] text-stroke">juntos?</span>
-            </h2>
-
-            <div className="space-y-6 mb-12">
-              <p className="text-lg md:text-xl text-[#111111]/80 leading-relaxed">
-                A Robótica BSB está pronta para levar sua metodologia, seus valores e sua didática para dentro da sua instituição, de um jeito{' '}
-                <span className="highlight-badge">simples</span>, <span className="highlight-badge" style={{ background: '#01a1e1' }}>organizado</span> e totalmente integrado ao projeto pedagógico da escola.
-              </p>
-
-              <p className="text-lg md:text-xl text-[#111111]/80 leading-relaxed">
-                Se você acredita em uma educação que <span className="highlight-badge" style={{ background: '#ffd900', color: '#111111' }}>prepara para a vida</span>, que desperta curiosidade e desenvolve pensamento criativo, então o próximo movimento é natural: vamos caminhar lado a lado.
-              </p>
-
-              <p className="text-lg md:text-xl text-[#111111]/80 leading-relaxed">
-                Porque quando a tecnologia encontra propósito, e quando a escola encontra parceiros que acreditam no mesmo futuro, tudo cresce: as ideias, os alunos e a comunidade inteira.
-              </p>
-            </div>
-
-            <button
-              className={`${NEO_BTN} bg-[#45b227] text-white text-lg px-8 py-4`}
-              onClick={openWhatsApp}
-            >
-              💬 Fale Conosco no WhatsApp
-            </button>
-          </div>
-        </div>
-      </section>
 
       <Suspense fallback={null}>
         <Footer />

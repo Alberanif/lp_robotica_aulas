@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 export default function ContactCondo() {
     const whatsappLink =
@@ -8,33 +7,6 @@ export default function ContactCondo() {
     return (
         <section className="w-full py-16 px-4 flex flex-col items-center justify-center relative z-10">
             <div className="relative w-full max-w-[380px] flex flex-col items-center gap-6">
-
-                {/* Contact Card */}
-                <div className="relative w-full">
-                    {/* Prof. Emanuel Avatar with Yellow Border */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                        <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full border-[5px] border-[#ffd900] overflow-hidden bg-brand-bg shadow-xl">
-                            <Image
-                                src="/images/Emanuel.png"
-                                alt="Prof. Emanuel"
-                                fill
-                                className="object-cover object-[center_top] scale-110"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Small contact info card */}
-                    <div className="bg-white border-[10px] border-[#01a1e1] rounded-[2rem] pt-12 pb-6 px-6 flex flex-col items-center shadow-[0_20px_40px_rgba(1,161,225,0.2)]">
-                        <div className="text-center">
-                            <h2 className="font-display font-black text-[#111111] text-xl md:text-2xl leading-[1.1] mb-1">
-                                Robótica BSB | Prof. Emanuel
-                            </h2>
-                            <p className="font-body text-gray-500 text-xs md:text-sm">
-                                WhatsApp business account
-                            </p>
-                        </div>
-                    </div>
-                </div>
 
                 {/* WhatsApp Shiny Button */}
                 <div className="inline-block bg-transparent">

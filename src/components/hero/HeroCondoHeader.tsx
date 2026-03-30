@@ -1,116 +1,128 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sparkles } from "lucide-react";
+
+const LETTERS = [
+  { char: "R", color: "#00A8FF" },
+  { char: "O", color: "#FBC531" },
+  { char: "B", color: "#E84118" },
+  { char: "Ó", color: "#4CD137" },
+  { char: "T", color: "#00A8FF" },
+  { char: "I", color: "#FBC531" },
+  { char: "C", color: "#E84118" },
+  { char: "A", color: "#4CD137" },
+  { char: " ", color: "" },
+  { char: "B", color: "#00A8FF" },
+  { char: "S", color: "#FBC531" },
+  { char: "B", color: "#E84118" },
+];
+
+const HIGHLIGHTS = [
+  { text: "+ 500 Alunos",      border: "#01a1e1", dot: "#01a1e1" },
+  { text: "Metodologia Única", border: "#f01600", dot: "#f01600" },
+  { text: "Desde 2022",        border: "#45b227", dot: "#45b227" },
+];
 
 export default function HeroCondoHeader() {
-  const [animationKey, setAnimationKey] = useState(0);
-
-  const handleResetAnimation = () => {
-    setAnimationKey((prev) => prev + 1);
-  };
+  const [key, setKey] = useState(0);
 
   return (
-    <div 
-      className="container mx-auto text-center flex flex-col items-center justify-center w-full max-w-5xl py-4 md:py-8 cursor-pointer select-none"
-      onClick={handleResetAnimation}
+    <div
+      className="w-full flex flex-col items-center text-center select-none cursor-pointer"
+      onClick={() => setKey((k) => k + 1)}
     >
       <style jsx>{`
-        .fredoka {
+        .letter {
           font-family: var(--font-fredoka), sans-serif;
-        }
-        
-        .liquid-glass-card::before {
-          content: "";
-          position: absolute;
-          top: 2px;
-          left: 10%;
-          width: 80%;
-          height: 35%;
-          background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), transparent);
-          border-radius: 50%;
-          pointer-events: none;
+          font-weight: 700;
+          line-height: 1;
+          -webkit-text-stroke: 3px #111111;
+          paint-order: stroke fill;
+          display: inline-block;
         }
 
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+        @media (min-width: 640px) {
+          .letter { -webkit-text-stroke: 4px #111111; }
+        }
+        @media (min-width: 1024px) {
+          .letter { -webkit-text-stroke: 5px #111111; }
         }
 
-        .animate-fade-in {
-          animation: fadeIn 0.8s ease-out forwards;
+        .stamp-wrap {
+          animation: stamp-in ${key >= 0 ? "0.45s" : "0s"} cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+        }
+
+        @keyframes stamp-in {
+          0%   { opacity: 0; transform: scale(3.5) rotate(-20deg); }
+          80%  { opacity: 1; transform: scale(0.95) rotate(-10deg); }
+          100% { opacity: 1; transform: scale(1) rotate(-10deg); }
+        }
+
+        .highlight-pill {
+          background: white;
+          border-radius: 9999px;
+          border-width: 2px;
+          border-style: solid;
+          padding: 0.4rem 1.1rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-weight: 600;
+          font-size: 0.85rem;
+          white-space: nowrap;
+          color: #111;
+        }
+
+        @media (min-width: 640px) {
+          .highlight-pill { font-size: 1rem; padding: 0.5rem 1.4rem; }
         }
       `}</style>
 
-      {/* Main Title with Black Outline */}
-      <div className="fredoka flex justify-center gap-1 md:gap-2 mb-2 md:mb-4">
-        {[
-          { char: "R", color: "text-[#00A8FF]" },
-          { char: "O", color: "text-[#FBC531]" },
-          { char: "B", color: "text-[#E84118]" },
-          { char: "Ó", color: "text-[#4CD137]" },
-          { char: "T", color: "text-[#00A8FF]" },
-          { char: "I", color: "text-[#FBC531]" },
-          { char: "C", color: "text-[#E84118]" },
-          { char: "A", color: "text-[#4CD137]" },
-          { char: " ", color: "" },
-          { char: "B", color: "text-[#00A8FF]" },
-          { char: "S", color: "text-[#FBC531]" },
-          { char: "B", color: "text-[#E84118]" },
-        ].map((item, index) => (
-          <span
-            key={`${animationKey}-${index}`}
-            className={`
-              ${item.color} 
-              text-stroke-black 
-              text-5xl sm:text-7xl md:text-8xl lg:text-9xl 
-              font-black uppercase tracking-tighter
-            `}
-          >
-            {item.char === " " ? <span className="inline-block w-4 md:w-8" /> : item.char}
-          </span>
-        ))}
+      {/* ROBÓTICA BSB — letras coloridas */}
+      <div className="flex flex-wrap justify-center gap-0 mb-2">
+        {LETTERS.map((l, i) =>
+          l.char === " " ? (
+            <span key={`${key}-sp`} className="inline-block w-3 sm:w-5 md:w-7" />
+          ) : (
+            <span
+              key={`${key}-${i}`}
+              className="letter text-5xl sm:text-7xl md:text-8xl lg:text-9xl"
+              style={{ color: l.color }}
+            >
+              {l.char}
+            </span>
+          )
+        )}
       </div>
 
-      {/* Stamp Animation Subtitle */}
-      <div className="h-24 md:h-32 flex justify-center items-center w-full mb-8 md:mb-12">
-        <div 
-          key={animationKey}
-          className="animate-stamp border-[6px] md:border-[8px] border-[#00A8FF] px-6 md:px-10 py-2 md:py-3 rounded-2xl md:rounded-3xl bg-white/40 backdrop-blur-sm whitespace-nowrap"
+      {/* NOS CONDOMÍNIOS — efeito carimbo */}
+      <div className="h-20 sm:h-24 md:h-28 flex items-center justify-center mb-6 md:mb-10">
+        <div
+          key={key}
+          className="stamp-wrap inline-block border-[5px] md:border-[6px] border-[#01a1e1] rounded-2xl md:rounded-3xl px-6 md:px-10 py-2 md:py-3 bg-white/50 backdrop-blur-sm"
         >
-          <span className="fredoka text-2xl md:text-4xl lg:text-5xl font-bold uppercase">
-            <span className="text-[#FBC531]">Nos</span>{" "}
-            <span className="text-[#4CD137]">Condomínios</span>
+          <span
+            className="font-bold uppercase tracking-wide text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
+            style={{
+              fontFamily: "var(--font-fredoka), sans-serif",
+            }}
+          >
+            <span style={{ color: "#FBC531" }}>Nos </span>
+            <span style={{ color: "#4CD137" }}>Condomínios</span>
           </span>
         </div>
       </div>
 
-      {/* Highlights Grid */}
-      <div 
-        key={`grid-${animationKey}`}
-        className="animate-fade-in opacity-0 grid grid-cols-3 gap-1.5 sm:gap-4 md:gap-6 w-full max-w-4xl"
-        style={{ animationDelay: "1.2s" }}
-      >
-        {[
-          { text: "+ 500 Alunos", border: "border-[#00A8FF]", dot: "text-[#00A8FF]" },
-          { text: "Metodologia Única", border: "border-[#E84118]", dot: "text-[#E84118]" },
-          { text: "Desde 2022", border: "border-[#4CD137]", dot: "text-[#4CD137]" },
-        ].map((item, idx) => (
-          <div 
-            key={idx}
-            className={`
-              liquid-glass-card relative overflow-hidden bg-white/50 backdrop-blur-md 
-              border-[1.5px] md:border-[2px] ${item.border} 
-              rounded-[20px] sm:rounded-[40px] md:rounded-[50px] 
-              py-2 md:py-4 px-2 md:px-8 
-              text-slate-700 font-bold 
-              text-[10px] sm:text-base md:text-xl 
-              shadow-sm transition-all hover:-translate-y-1 hover:bg-white/70 hover:shadow-md 
-              flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-2
-            `}
+      {/* 3 destaques */}
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 w-full">
+        {HIGHLIGHTS.map((h) => (
+          <div
+            key={h.text}
+            className="highlight-pill"
+            style={{ borderColor: h.border }}
           >
-            <span className={item.dot}>✦</span> 
-            <span className="text-center sm:text-left leading-[1.1]">{item.text}</span>
+            <span style={{ color: h.dot }}>✦</span>
+            <span>{h.text}</span>
           </div>
         ))}
       </div>
