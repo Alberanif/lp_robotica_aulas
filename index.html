@@ -14,6 +14,8 @@
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""
   >
+  <script src="https://fast.wistia.com/player.js" async></script>
+  <script src="https://fast.wistia.com/embed/9vzakjxig7.js" async type="module"></script>
   <style>
 
     /* ── VARIABLES ──────────────────────────────────── */
@@ -264,67 +266,21 @@
       border: 3.5px solid var(--ink);
       border-radius: 22px;
       overflow: hidden;
-      aspect-ratio: 9 / 16;
       max-width: 360px;
       margin: 0 auto;
       box-shadow: 9px 9px 0 var(--red);
-      cursor: pointer;
     }
-    .video-thumb {
-      position: absolute;
-      inset: 0;
+    .video-frame wistia-player {
+      display: block;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
-    .video-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
+    .video-frame wistia-player[media-id='9vzakjxig7']:not(:defined) {
+      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/9vzakjxig7/swatch');
+      filter: blur(5px);
+      padding-top: 177.78%;
     }
-    .video-play-btn {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .video-play-circle {
-      width: 78px; height: 78px;
-      border-radius: 50%;
-      background: var(--green);
-      border: 3.5px solid var(--ink);
-      box-shadow: 5px 5px 0 var(--ink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .play-triangle {
-      width: 0; height: 0;
-      border-left: 24px solid #fff;
-      border-top: 14px solid transparent;
-      border-bottom: 14px solid transparent;
-      margin-left: 6px;
-    }
-    .video-caption {
-      position: absolute;
-      bottom: 10px; left: 10px; right: 10px;
-      background: #fff;
-      border: 2.5px solid var(--ink);
-      border-radius: 12px;
-      padding: 8px 12px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--ink);
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-    .video-iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: none;
+    .video-frame .wistia_preload_transcript_outer_wrapper {
+      display: none !important;
     }
     .hero-form-col .hard-card { --shadow-color: var(--blue); --card-radius: 22px; --card-pad: 18px; }
     .form-title {
@@ -1042,15 +998,7 @@
 
     <div class="hero-video-col">
       <div class="video-frame" id="video-frame">
-        <img src="images/elementos-videos.jpg" alt="" class="video-thumb">
-        <div class="video-overlay"></div>
-        <div class="video-play-btn" id="video-play-btn">
-          <div class="video-play-circle">
-            <div class="play-triangle"></div>
-          </div>
-        </div>
-        <div class="video-caption">▶ Veja como são as aulas em 30 segundos</div>
-        <iframe class="video-iframe" id="video-iframe" src="" allowfullscreen></iframe>
+        <wistia-player media-id="9vzakjxig7" aspect="0.5625"></wistia-player>
       </div>
     </div>
 
@@ -1508,28 +1456,6 @@
       });
     }
 
-    function initVideoClick() {
-      const frame  = document.getElementById('video-frame');
-      const playEl = document.getElementById('video-play-btn');
-      const iframe = document.getElementById('video-iframe');
-      const videoSrc = (iframe.dataset.src || iframe.getAttribute('src') || '').trim();
-
-      if (!videoSrc) {
-        frame.style.cursor = 'default';
-        return;
-      }
-
-      frame.addEventListener('click', () => {
-        if (iframe.style.display === 'block') return;
-        frame.querySelector('.video-thumb').style.display    = 'none';
-        frame.querySelector('.video-overlay').style.display  = 'none';
-        playEl.style.display    = 'none';
-        frame.querySelector('.video-caption').style.display  = 'none';
-        iframe.src = videoSrc;
-        iframe.style.display    = 'block';
-      });
-    }
-
     function initLocationMap() {
       const mapEl = document.getElementById('location-map');
       const mapLink = document.querySelector('.map-addr-btn');
@@ -1647,7 +1573,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('[data-comic]').forEach(renderComicTitle);
       initHeroForm();
-      initVideoClick();
       initFlippingCalendar();
       initCarousel(document.getElementById('schedule-carousel'));
       initEvolution();
