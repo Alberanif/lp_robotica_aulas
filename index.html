@@ -3,10 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Robótica BSB — Inscrições Abertas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  >
   <style>
 
     /* ── VARIABLES ──────────────────────────────────── */
@@ -27,7 +34,9 @@
       background: var(--bg);
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
       color: var(--ink);
+      scroll-behavior: smooth;
     }
+    body { overflow-x: hidden; }
     img, svg { display: block; max-width: 100%; }
     button { font-family: inherit; cursor: pointer; }
     a { text-decoration: none; }
@@ -663,6 +672,45 @@
       border-radius: 17px 17px 0 0;
       overflow: hidden;
     }
+    .map-area::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(250,239,217,0.14), rgba(250,239,217,0)),
+        radial-gradient(circle at 22% 22%, rgba(255,255,255,0.55), transparent 28%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .map-canvas {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0)),
+        #eaf3fb;
+      transition: opacity 180ms ease;
+    }
+    .map-canvas.is-ready {
+      background: transparent;
+    }
+    .map-canvas.is-fallback::after {
+      content: "Mapa indisponível no momento";
+      position: absolute;
+      left: 14px;
+      bottom: 12px;
+      background: rgba(255,255,255,0.96);
+      border: 2px solid var(--ink);
+      border-radius: 9px;
+      padding: 4px 8px;
+      box-shadow: 2px 2px 0 var(--ink);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      z-index: 2;
+    }
     .map-addr-card {
       position: absolute; top: 14px; left: 14px; right: 14px;
       background: #fff; border: 2.5px solid var(--ink); border-radius: 12px;
@@ -679,8 +727,99 @@
       -webkit-text-stroke: 0.6px var(--ink); paint-order: stroke fill;
       display: inline-block;
     }
-    .map-pin { position: absolute; bottom: 60px; right: 60px; width: 28px; height: 28px; border-radius: 50%; background: var(--red); border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); display: flex; align-items: center; justify-content: center; }
-    .map-pin-dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+    .map-area .leaflet-control-attribution {
+      background: rgba(255,255,255,0.92);
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      box-shadow: 2px 2px 0 var(--ink);
+      color: var(--ink);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 10px 10px 0;
+      padding: 3px 6px;
+    }
+    .map-area .leaflet-control-attribution a {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+    .map-area .leaflet-bottom,
+    .map-area .leaflet-top {
+      z-index: 2;
+    }
+    .leaflet-container {
+      font: inherit;
+      background: #eaf3fb;
+      outline: none;
+    }
+    .leaflet-container a {
+      color: inherit;
+    }
+    .map-marker {
+      width: 34px;
+      height: 34px;
+      border-radius: 50% 50% 50% 0;
+      background: var(--red);
+      border: 3px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      transform: rotate(-45deg);
+      position: relative;
+      animation: marker-pop 420ms cubic-bezier(.18,.89,.32,1.28);
+    }
+    .map-marker::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid var(--ink);
+    }
+    @keyframes marker-pop {
+      0% { transform: rotate(-45deg) translateY(-10px) scale(0.85); opacity: 0; }
+      100% { transform: rotate(-45deg) translateY(0) scale(1); opacity: 1; }
+    }
+    .map-route-wrap {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+    }
+    .map-route-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 10px 18px;
+      background: #fff;
+      color: var(--ink);
+      border: 2.5px solid var(--ink);
+      border-radius: 999px;
+      box-shadow: 4px 4px 0 var(--ink);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .map-route-btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: 0 0 0 var(--ink);
+    }
+    .map-route-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
     .location-notice { margin-top: 32px; }
     .notice-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--yellow); border: 2.5px solid var(--ink); display: flex; align-items: center; justify-content: center; font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 22px; color: var(--ink); }
     .notice-text { font-size: 13.5px; line-height: 1.5; font-weight: 600; color: var(--ink); }
@@ -697,6 +836,183 @@
     .footer-divider { border-top: 1px solid rgba(255,255,255,0.4); margin: 24px 0 18px; }
     .footer-copy { margin-top: 20px; font-size: 11px; font-weight: 700; opacity: 0.85; letter-spacing: 0.04em; }
 
+    /* ── DESKTOP ────────────────────────────────────── */
+    @media (min-width: 900px) {
+      #topnav {
+        padding: 18px 56px;
+      }
+      #topnav .comic-title {
+        --ct-size: 16px;
+      }
+
+      #hero,
+      #schedule,
+      #evolution,
+      #gallery,
+      #location,
+      #footer {
+        padding-left: 56px;
+        padding-right: 56px;
+      }
+
+      #hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 56px;
+        row-gap: 28px;
+        align-items: center;
+        max-width: 1180px;
+        margin: 0 auto;
+        padding-top: 72px;
+        padding-bottom: 96px;
+      }
+      .hero-headline,
+      .hero-stamp-row,
+      .hero-pitch {
+        grid-column: 1 / -1;
+      }
+      .hero-headline {
+        margin-bottom: 8px;
+      }
+      .hero-headline .comic-title {
+        --ct-size: 72px;
+        --ct-stroke: 4px;
+      }
+      .hero-stamp-row {
+        margin-bottom: 16px;
+      }
+      .hero-pitch {
+        max-width: 760px;
+        margin: 0 auto 24px;
+        font-size: 19px;
+      }
+      .hero-video-col {
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+      }
+      .video-frame {
+        width: 100%;
+        max-width: 320px;
+        margin: 0;
+      }
+      .hero-form-col {
+        align-self: center;
+      }
+
+      #schedule,
+      #evolution,
+      #gallery,
+      #location {
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+      #schedule .comic-title,
+      #gallery .comic-title {
+        --ct-size: 48px;
+        --ct-stroke: 3px;
+      }
+      #evolution .comic-title,
+      #location .comic-title {
+        --ct-size: 44px;
+        --ct-stroke: 3px;
+      }
+
+      #schedule {
+        max-width: 1240px;
+        margin: 0 auto;
+      }
+      #schedule-carousel {
+        display: none;
+      }
+      .schedule-desktop {
+        display: block;
+        margin-top: 8px;
+      }
+
+      #evolution {
+        max-width: 1240px;
+        margin: 0 auto;
+      }
+      .staircase {
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      #evo-detail {
+        max-width: 520px;
+        margin: 32px auto 0;
+      }
+      .founder-card {
+        max-width: 420px;
+        margin: 40px auto 0;
+      }
+
+      #gallery {
+        max-width: 1240px;
+        margin: 0 auto;
+      }
+      #gallery-carousel {
+        display: none;
+      }
+      .gallery-desktop {
+        display: block;
+      }
+
+      #location {
+        max-width: 1240px;
+        margin: 0 auto;
+      }
+      .location-pitch {
+        max-width: 860px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .location-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.08fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .location-notice {
+        max-width: 760px;
+        margin: 40px auto 0;
+      }
+
+      #footer {
+        padding-top: 56px;
+        padding-bottom: 44px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      .foot-col-left {
+        text-align: left;
+      }
+      .foot-col-center {
+        text-align: center;
+      }
+      .foot-col-right {
+        text-align: right;
+      }
+      .foot-col-left .footer-logo-card {
+        margin-bottom: 0;
+      }
+      .footer-social-btns {
+        align-items: center;
+      }
+      .footer-divider {
+        display: none;
+      }
+      .footer-copy {
+        max-width: 980px;
+        margin: 28px auto 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -847,7 +1163,9 @@
     </div>
 
     <div style="margin-top:22px;">
-      <button class="big-cta" style="--cta-bg:var(--green);">AGENDE UMA AULA EXPERIMENTAL</button>
+      <a href="#field-nome" class="big-cta" style="--cta-bg:var(--green);">
+        AGENDE UMA AULA EXPERIMENTAL
+      </a>
     </div>
   </section>
 
@@ -893,7 +1211,7 @@
       <div class="founder-name">Prof. Emanuel</div>
       <div class="founder-role">Fundador da Robótica BSB</div>
       <div style="margin-top:20px;">
-        <a href="https://wa.me/5561999999999" target="_blank" rel="noopener" class="big-cta" style="--cta-bg:var(--green);">📱 Entre em contato</a>
+        <a href="https://api.whatsapp.com/send/?phone=5561991864835&text=Ol%C3%A1%21+Eu+gostaria+de+agendar+uma+aula+experimental+de+rob%C3%B3tica&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="big-cta" style="--cta-bg:var(--green);">📱 Entre em contato</a>
       </div>
     </div>
   </section>
@@ -978,14 +1296,27 @@
         </div>
       </div>
 
-      <div class="hard-card" style="--shadow-color:var(--red); --card-radius:20px; --card-pad:0; overflow:hidden;">
-        <div class="map-area">
-          <div class="map-addr-card">
-            <div class="map-addr-title">ROBÓTICA BSB</div>
-            <div class="map-addr-text">CLN 302 Bloco B, Sala 113<br>Asa Norte, Brasília DF</div>
-            <a href="https://maps.google.com/?q=CLN+302+Bloco+B+Sala+113+Asa+Norte+Brasília+DF" target="_blank" rel="noopener" class="map-addr-btn">COMO CHEGAR</a>
+      <div>
+        <div class="hard-card" style="--shadow-color:var(--red); --card-radius:20px; --card-pad:0; overflow:hidden;">
+          <div class="map-area">
+            <div id="location-map" class="map-canvas is-fallback" aria-label="Mapa da unidade Asa Norte"></div>
+            <div class="map-addr-card">
+              <div class="map-addr-title">ROBÓTICA BSB</div>
+              <div class="map-addr-text">CLN 302 Bloco B, Sala 113<br>Asa Norte, Brasília DF</div>
+              <a href="https://maps.google.com/?q=-15.78082477478041,-47.8850717236761" target="_blank" rel="noopener" class="map-addr-btn">COMO CHEGAR</a>
+            </div>
           </div>
-          <div class="map-pin"><div class="map-pin-dot"></div></div>
+        </div>
+        <div class="map-route-wrap">
+          <a
+            href="https://google.com/maps/dir//Asa+Norte+CLN+302+Rob%C3%B3tica+BSB,+Bloco+B+sala+113+-+Asa+Norte,+Bras%C3%ADlia+-+DF,+70723-520/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x935a3b0165e8df2d:0x76010db8382d162?sa=X&ved=1t:57443&ictx=111"
+            target="_blank"
+            rel="noopener"
+            class="map-route-btn"
+          >
+            <span class="map-route-icon">↗</span>
+            Traçar rota no Google Maps
+          </a>
         </div>
       </div>
     </div>
@@ -997,24 +1328,32 @@
   </section>
 
   <footer id="footer">
-    <div class="footer-logo-card">
-      <img src="images/logo.svg" alt="Robótica BSB" width="70" height="70">
+    <div class="footer-grid">
+      <div class="foot-col-left">
+        <div class="footer-logo-card">
+          <img src="images/logo.svg" alt="Robótica BSB" width="70" height="70">
+        </div>
+      </div>
+
+      <div class="foot-col-center">
+        <div class="footer-social-title">SIGA E FALE CONOSCO</div>
+        <div class="footer-social-btns">
+          <a href="https://www.instagram.com/roboticabsb?igsh=ZmR1b2VodTBsMnc0" target="_blank" rel="noopener" class="social-btn" style="background:#e1306c;">
+            <span class="social-icon">📷</span> Instagram
+          </a>
+          <a href="https://api.whatsapp.com/send/?phone=5561991864835&text=Ol%C3%A1%21+Eu+gostaria+de+agendar+uma+aula+experimental+de+rob%C3%B3tica&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="social-btn" style="background:var(--green);">
+            <span class="social-icon">✆</span> WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="foot-col-right">
+        <div class="footer-address-title">📍 ONDE ESTAMOS</div>
+        <div class="footer-address-text">CLN 302 Bloco B, Sala 113<br>Asa Norte, Brasília DF</div>
+      </div>
     </div>
-
-    <div class="footer-social-title">SIGA E FALE CONOSCO</div>
-    <div class="footer-social-btns">
-      <a href="https://instagram.com/roboticabsb" target="_blank" rel="noopener" class="social-btn" style="background:#e1306c;">
-        <span class="social-icon">📷</span> Instagram
-      </a>
-      <a href="https://wa.me/5561999999999" target="_blank" rel="noopener" class="social-btn" style="background:var(--green);">
-        <span class="social-icon">✆</span> WhatsApp
-      </a>
-    </div>
-
-    <div class="footer-divider"></div>
-
-    <div class="footer-address-title">📍 ONDE ESTAMOS</div>
-    <div class="footer-address-text">CLN 302 Bloco B, Sala 113<br>Asa Norte, Brasília DF</div>
 
     <div class="footer-copy">© 2026 Robótica BSB. Todos os direitos reservados.</div>
   </footer>
@@ -1022,6 +1361,9 @@
   <script>
     /* ── BRAND COLORS ───────────────────────────────── */
     const COLORS = ['#01a1e1', '#ffd900', '#f01600', '#45b227'];
+    const LOCATION_COORDS = [-15.78082477478041, -47.8850717236761];
+    const LOCATION_MAP_LINK = 'https://maps.google.com/?q=-15.78082477478041,-47.8850717236761';
+    const LOCATION_TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 
     /* ── LEVEL DATA ─────────────────────────────────── */
     const LEVELS = [
@@ -1035,22 +1377,22 @@
       {
         key: 'builder', label: 'BUILDER', age: '8 a 10 anos',
         color: '#f01600',
-        tagline: 'Construção de máquinas e mecanismos',
+        tagline: 'Introdução aos sensores e projetos mais desafiadores',
         skills: ['Engrenagens', 'Sensores básicos', 'Pensamento lógico'],
         icon: '🔧',
       },
       {
         key: 'programmer', label: 'PROGRAMMER', age: '10 a 13 anos',
         color: '#45b227',
-        tagline: 'Programa robôs e dá vida às ideias',
-        skills: ['Programação por blocos', 'Algoritmos', 'Resolução de problemas'],
+        tagline: 'Programação avançada e projetos mais complexos',
+        skills: ['Programação com Palavras', 'Sensores e Motores Avançados', 'Resolução de Problemas Reais'],
         icon: '💻',
       },
       {
         key: 'designer', label: 'DESIGNER', age: '13 a 16 anos',
         color: '#ffd900',
-        tagline: 'Cria projetos próprios do zero',
-        skills: ['Design de produto', 'IoT', 'Pensamento criativo'],
+        tagline: 'Estimulamos a criatividade para pensar em projetos próprios com programação avançada',
+        skills: ['Programação Python', 'Projetos Complexos', 'Cenários Reais'],
         icon: '🎨',
       },
     ];
@@ -1170,6 +1512,12 @@
       const frame  = document.getElementById('video-frame');
       const playEl = document.getElementById('video-play-btn');
       const iframe = document.getElementById('video-iframe');
+      const videoSrc = (iframe.dataset.src || iframe.getAttribute('src') || '').trim();
+
+      if (!videoSrc) {
+        frame.style.cursor = 'default';
+        return;
+      }
 
       frame.addEventListener('click', () => {
         if (iframe.style.display === 'block') return;
@@ -1177,9 +1525,72 @@
         frame.querySelector('.video-overlay').style.display  = 'none';
         playEl.style.display    = 'none';
         frame.querySelector('.video-caption').style.display  = 'none';
+        iframe.src = videoSrc;
         iframe.style.display    = 'block';
-        // iframe.src = 'URL_DO_VIDEO_AQUI'; // preencher após entrega
       });
+    }
+
+    function initLocationMap() {
+      const mapEl = document.getElementById('location-map');
+      const mapLink = document.querySelector('.map-addr-btn');
+
+      if (mapLink) {
+        mapLink.href = LOCATION_MAP_LINK;
+      }
+
+      if (!mapEl || typeof L === 'undefined') return;
+
+      const ReferrerSafeTileLayer = L.TileLayer.extend({
+        createTile(coords, done) {
+          const tile = L.TileLayer.prototype.createTile.call(this, coords, done);
+          tile.referrerPolicy = 'strict-origin-when-cross-origin';
+          return tile;
+        },
+      });
+
+      const isDesktop = window.matchMedia('(min-width: 900px)').matches;
+      const map = L.map(mapEl, {
+        zoomControl: false,
+        attributionControl: true,
+        scrollWheelZoom: false,
+        dragging: true,
+        doubleClickZoom: false,
+        boxZoom: false,
+        keyboard: false,
+        tap: true,
+      }).setView(LOCATION_COORDS, isDesktop ? 17 : 16);
+
+      new ReferrerSafeTileLayer(LOCATION_TILE_URL, {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      })
+        .on('load', () => {
+          mapEl.classList.remove('is-fallback');
+          mapEl.classList.add('is-ready');
+        })
+        .on('tileerror', () => {
+          mapEl.classList.add('is-fallback');
+        })
+        .addTo(map);
+
+      const markerIcon = L.divIcon({
+        className: '',
+        html: '<div class="map-marker" aria-hidden="true"></div>',
+        iconSize: [34, 34],
+        iconAnchor: [17, 30],
+        popupAnchor: [0, -26],
+      });
+
+      L.marker(LOCATION_COORDS, { icon: markerIcon })
+        .addTo(map)
+        .bindPopup('<strong>Robótica BSB</strong><br>CLN 302 Bloco B, Sala 113<br>Asa Norte, Brasília DF');
+
+      window.addEventListener('resize', () => {
+        map.setZoom(window.matchMedia('(min-width: 900px)').matches ? 17 : 16);
+        map.invalidateSize();
+      }, { passive: true });
+
+      setTimeout(() => map.invalidateSize(), 0);
     }
 
     function initEvolution() {
@@ -1241,7 +1652,13 @@
       initCarousel(document.getElementById('schedule-carousel'));
       initEvolution();
       initCarousel(document.getElementById('gallery-carousel'));
+      initLocationMap();
     });
   </script>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
 </body>
 </html>
