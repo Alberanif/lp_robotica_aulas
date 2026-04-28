@@ -450,6 +450,174 @@
       margin-top: 8px;
     }
 
+    /* ── EVOLUTION ──────────────────────────────────── */
+    #evolution {
+      padding: 36px 22px 48px;
+      text-align: center;
+      background: var(--bg);
+    }
+    #evolution .comic-title { --ct-size: 24px; }
+    .evo-sub {
+      margin: 26px 0 18px;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--ink);
+    }
+    .evo-badge {
+      display: inline-block;
+      background: var(--red); color: #fff;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      padding: 8px 16px;
+      box-shadow: 5px 5px 0 var(--ink);
+      font-weight: 800; font-size: 14px;
+      letter-spacing: 0.02em;
+      -webkit-text-stroke: 0.6px var(--ink);
+      paint-order: stroke fill;
+      margin-bottom: 8px;
+    }
+    .evo-hint {
+      font-style: italic;
+      font-size: 13px;
+      color: var(--ink);
+      opacity: 0.7;
+      margin: 0 0 30px;
+    }
+    .staircase {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      background: #fff;
+      border: 3px solid var(--ink);
+      border-radius: 22px;
+      box-shadow: 8px 8px 0 var(--ink);
+      overflow: hidden;
+      background-image: radial-gradient(rgba(17,17,17,0.1) 1px, transparent 1px);
+      background-size: 14px 14px;
+    }
+    .staircase-sun {
+      position: absolute;
+      top: 14px; right: 18px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--yellow);
+      border: 2.5px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .staircase-lbl {
+      position: absolute;
+      top: 12px; left: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700; font-size: 10px;
+      color: var(--ink); opacity: 0.5;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .staircase-ground {
+      position: absolute;
+      left: 0; right: 0; bottom: 22px;
+      height: 0;
+      border-top: 2.5px dashed rgba(17,17,17,0.2);
+    }
+    .step {
+      position: absolute;
+      left: calc(var(--step-left) + 6px);
+      width: calc(25% - 12px);
+      bottom: 22px;
+      height: var(--step-height);
+      cursor: pointer;
+    }
+    .step-block {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 100%;
+      background: var(--step-color);
+      border: 3px solid var(--ink);
+      border-radius: 6px 6px 0 0;
+      box-shadow: inset -3px 0 0 0 rgba(0,0,0,0.15);
+      transition: transform 120ms ease;
+    }
+    .step.active .step-block { transform: translateY(-4px); }
+    .step-number {
+      position: absolute;
+      left: 50%; transform: translateX(-50%);
+      bottom: 6px;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700; font-size: 18px;
+      color: #fff;
+      -webkit-text-stroke: 1.2px var(--ink);
+      paint-order: stroke fill;
+    }
+    .step-sign {
+      position: absolute;
+      left: 50%; top: -34px;
+      transform: translateX(-50%) rotate(-2deg);
+      transition: transform 120ms ease;
+    }
+    .step.active .step-sign { transform: translateX(-50%) rotate(0deg); }
+    .step-sign-label {
+      display: block;
+      background: #fff;
+      border: 2.5px solid var(--ink);
+      border-radius: 10px;
+      padding: 4px 8px;
+      box-shadow: 3px 3px 0 var(--ink);
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700; font-size: 11px;
+      color: var(--step-color);
+      -webkit-text-stroke: 0.8px var(--ink);
+      paint-order: stroke fill;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .step.active .step-sign-label { box-shadow: 4px 4px 0 var(--step-color); }
+    .step-peg { width: 2px; height: 6px; background: var(--ink); margin: 0 auto; }
+    #evo-detail { margin-top: 32px; text-align: left; --card-radius: 20px; --card-pad: 18px; }
+    .evo-detail-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .evo-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      border: 2.5px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; flex-shrink: 0;
+    }
+    .evo-label {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700; font-size: 22px;
+      -webkit-text-stroke: 1.2px var(--ink);
+      paint-order: stroke fill;
+      line-height: 1; text-transform: uppercase;
+    }
+    .evo-age {
+      font-weight: 700; font-size: 12px;
+      color: var(--ink); opacity: 0.7;
+      margin-top: 2px; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .evo-tagline { font-weight: 600; font-size: 14px; line-height: 1.45; color: var(--ink); margin-bottom: 12px; }
+    .evo-skills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      background: var(--bg);
+      border: 2px solid var(--ink); border-radius: 8px;
+      padding: 4px 10px; font-size: 11.5px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink);
+    }
+    .founder-card { margin-top: 40px; text-align: center; }
+    .founder-avatar {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      border: 3px solid var(--ink);
+      margin: 0 auto 10px;
+      overflow: hidden;
+    }
+    .founder-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .founder-name { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 20px; color: var(--ink); }
+    .founder-role {
+      font-weight: 800; font-size: 11px;
+      letter-spacing: 0.1em; color: var(--ink); opacity: 0.7;
+      text-transform: uppercase; margin-top: 2px;
+    }
+
   </style>
 </head>
 <body>
@@ -601,6 +769,53 @@
 
     <div style="margin-top:22px;">
       <button class="big-cta" style="--cta-bg:var(--green);">AGENDE UMA AULA EXPERIMENTAL</button>
+    </div>
+  </section>
+
+  <section id="evolution">
+    <h2 class="comic-title" data-comic="byWord" data-text="EVOLUÇÃO PENSADA NO FUTURO DA NOVA GERAÇÃO"></h2>
+
+    <p class="evo-sub">A nossa metodologia de ensino é composta por</p>
+    <div><div class="evo-badge">4 níveis de aprendizado</div></div>
+    <p class="evo-hint">(Toque em um degrau para ver os detalhes)</p>
+
+    <div class="staircase">
+      <div class="staircase-sun"></div>
+      <div class="staircase-lbl">NÍVEL ↑</div>
+      <div class="staircase-ground"></div>
+      <div class="step" data-key="starter" style="--step-color:#01a1e1; --step-left:0%; --step-height:68px;">
+        <div class="step-block"></div>
+        <div class="step-number">1</div>
+        <div class="step-sign"><span class="step-sign-label">STARTER</span><div class="step-peg"></div></div>
+      </div>
+      <div class="step" data-key="builder" style="--step-color:#f01600; --step-left:25%; --step-height:106px;">
+        <div class="step-block"></div>
+        <div class="step-number">2</div>
+        <div class="step-sign"><span class="step-sign-label">BUILDER</span><div class="step-peg"></div></div>
+      </div>
+      <div class="step" data-key="programmer" style="--step-color:#45b227; --step-left:50%; --step-height:144px;">
+        <div class="step-block"></div>
+        <div class="step-number">3</div>
+        <div class="step-sign"><span class="step-sign-label">PROGRAMMER</span><div class="step-peg"></div></div>
+      </div>
+      <div class="step" data-key="designer" style="--step-color:#ffd900; --step-left:75%; --step-height:182px;">
+        <div class="step-block"></div>
+        <div class="step-number">4</div>
+        <div class="step-sign"><span class="step-sign-label">DESIGNER</span><div class="step-peg"></div></div>
+      </div>
+    </div>
+
+    <div class="hard-card" id="evo-detail"></div>
+
+    <div class="hard-card founder-card">
+      <div class="founder-avatar">
+        <img src="images/Emanuel.png" alt="Prof. Emanuel" width="70" height="70" loading="lazy">
+      </div>
+      <div class="founder-name">Prof. Emanuel</div>
+      <div class="founder-role">Fundador da Robótica BSB</div>
+      <div style="margin-top:20px;">
+        <a href="https://wa.me/5561999999999" target="_blank" rel="noopener" class="big-cta" style="--cta-bg:var(--green);">📱 Entre em contato</a>
+      </div>
     </div>
   </section>
 
@@ -769,6 +984,35 @@
       });
     }
 
+    function initEvolution() {
+      const steps  = document.querySelectorAll('.step');
+      const detail = document.getElementById('evo-detail');
+
+      function selectLevel(key) {
+        const lv = LEVELS.find(l => l.key === key);
+        if (!lv) return;
+        steps.forEach(s => s.classList.toggle('active', s.dataset.key === key));
+        detail.style.setProperty('--shadow-color', lv.color);
+        detail.innerHTML = `
+          <div class="tape" style="width:70px; top:-12px; left:50%; transform:translateX(-50%) rotate(3deg);"></div>
+          <div class="evo-detail-header">
+            <div class="evo-icon" style="background:${lv.color};">${lv.icon}</div>
+            <div>
+              <div class="evo-label" style="color:${lv.color};">${lv.label}</div>
+              <div class="evo-age">${lv.age}</div>
+            </div>
+          </div>
+          <p class="evo-tagline">${lv.tagline}.</p>
+          <div class="evo-skills">
+            ${lv.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
+          </div>
+        `;
+      }
+
+      steps.forEach(step => step.addEventListener('click', () => selectLevel(step.dataset.key)));
+      selectLevel('builder');
+    }
+
     function initFlippingCalendar() {
       const dates = [
         { day: 12, dow: 'SEG' }, { day: 15, dow: 'QUI' },
@@ -797,6 +1041,7 @@
       initVideoClick();
       initFlippingCalendar();
       initCarousel(document.getElementById('schedule-carousel'));
+      initEvolution();
     });
   </script>
 </body>
