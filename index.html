@@ -199,15 +199,395 @@
       background: #fff;
     }
 
+    /* ── TOPNAV ─────────────────────────────────────── */
+    #topnav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: #fff;
+      border-bottom: 2px solid var(--ink);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .topnav-logo { width: 28px; height: 28px; object-fit: contain; }
+    #topnav .comic-title {
+      --ct-size: 13px;
+      --ct-stroke: 1.2px;
+      letter-spacing: 0.04em;
+      text-align: left;
+      line-height: 1;
+    }
+
+    /* ── HERO ───────────────────────────────────────── */
+    #hero {
+      padding: 32px 22px 44px;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-deco {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.18;
+    }
+    .hero-deco-rocket { right: -20px; top: 40px; width: 140px; transform: rotate(12deg); }
+    .hero-deco-robot  { left: -30px; bottom: 60px; width: 160px; transform: rotate(-8deg); }
+    .hero-headline { text-align: center; margin-bottom: 22px; }
+    .hero-headline .comic-title { --ct-size: 38px; --ct-stroke: 2.4px; --ct-lh: 1; }
+    .hero-stamp-row { display: flex; justify-content: center; margin-bottom: 24px; }
+    .hero-stamp { transform: rotate(-3deg); }
+    .hero-pitch {
+      text-align: center;
+      font-size: 14.5px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--ink);
+      margin: 0 0 32px;
+      text-wrap: pretty;
+    }
+    .hero-video-col { position: relative; margin-bottom: 28px; }
+    .video-frame {
+      position: relative;
+      background: #1a1a1a;
+      border: 3.5px solid var(--ink);
+      border-radius: 22px;
+      overflow: hidden;
+      aspect-ratio: 9 / 16;
+      max-width: 360px;
+      margin: 0 auto;
+      box-shadow: 9px 9px 0 var(--red);
+      cursor: pointer;
+    }
+    .video-thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+    }
+    .video-play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-play-circle {
+      width: 78px; height: 78px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 3.5px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .play-triangle {
+      width: 0; height: 0;
+      border-left: 24px solid #fff;
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+      margin-left: 6px;
+    }
+    .video-caption {
+      position: absolute;
+      bottom: 10px; left: 10px; right: 10px;
+      background: #fff;
+      border: 2.5px solid var(--ink);
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .video-iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
+    .hero-form-col .hard-card { --shadow-color: var(--blue); --card-radius: 22px; --card-pad: 18px; }
+    .form-title {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 1.15;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    #hero-form { display: flex; flex-direction: column; gap: 12px; }
+    .form-fields { display: flex; flex-direction: column; gap: 12px; }
+    .form-privacy {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink);
+      opacity: 0.7;
+      text-align: center;
+      margin-top: 2px;
+    }
+    #form-success { display: none; text-align: center; padding: 12px 0; }
+    .success-emoji { font-size: 36px; }
+    .success-msg {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--green);
+      margin-top: 6px;
+    }
+    #form-error {
+      display: none;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--red);
+      text-align: center;
+      margin-top: 8px;
+      padding: 8px 12px;
+      border: 2px solid var(--red);
+      border-radius: 10px;
+      background: #fff;
+    }
+
   </style>
 </head>
 <body>
 
-  <!-- sections go here -->
+  <nav id="topnav">
+    <img src="images/logo.svg" alt="Robótica BSB" class="topnav-logo">
+    <h2 class="comic-title" data-comic="byWord" data-text="FORMANDO A PRÓXIMA GERAÇÃO"></h2>
+  </nav>
+
+  <section id="hero">
+    <img src="images/Foguete.svg" alt="" class="hero-deco hero-deco-rocket" aria-hidden="true">
+    <img src="images/Robo.svg"    alt="" class="hero-deco hero-deco-robot"  aria-hidden="true">
+
+    <div class="hero-headline">
+      <h2 class="comic-title" data-comic="byChar" data-text="ROBÓTICA BSB"></h2>
+    </div>
+
+    <div class="hero-stamp-row">
+      <div class="stamp hero-stamp">Inscrições<br>Abertas</div>
+    </div>
+
+    <p class="hero-pitch">
+      Mais do que uma aula de robótica, uma verdadeira
+      <span class="pill">experiência de aprendizado</span>
+      para que seu filho domine a tecnologia enquanto se diverte.
+    </p>
+
+    <div class="hero-video-col">
+      <div class="video-frame" id="video-frame">
+        <img src="images/elementos-videos.jpg" alt="" class="video-thumb">
+        <div class="video-overlay"></div>
+        <div class="video-play-btn" id="video-play-btn">
+          <div class="video-play-circle">
+            <div class="play-triangle"></div>
+          </div>
+        </div>
+        <div class="video-caption">▶ Veja como são as aulas em 30 segundos</div>
+        <iframe class="video-iframe" id="video-iframe" src="" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="hero-form-col">
+      <div class="hard-card">
+        <div class="tape" style="width:92px; top:-12px; left:50%; transform:translateX(-50%) rotate(-4deg);"></div>
+        <h3 class="form-title">
+          Traga seu filho para uma
+          <span class="pill" style="--pill-bg:var(--yellow); --pill-color:var(--ink); --pill-tilt:-2deg;">aula experimental</span>
+          e veja ele se apaixonar por aprender.
+        </h3>
+        <form id="hero-form" novalidate>
+          <div class="form-fields">
+            <div class="field-group">
+              <label class="field-label" for="field-nome">Nome do Responsável</label>
+              <input class="field-input" type="text" id="field-nome" name="nome" placeholder="Ex: João Pedro" required>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="field-tel">Telefone / WhatsApp</label>
+              <input class="field-input" type="tel" id="field-tel" name="telefone" placeholder="(61) 99999-9999" required>
+            </div>
+          </div>
+          <div style="margin-top:4px;">
+            <button type="submit" class="big-cta" id="form-btn" style="--cta-bg:var(--green);">
+              TRANSFORMAR O FUTURO DO MEU FILHO
+              <div class="big-cta-sub">grátis · sem compromisso</div>
+            </button>
+          </div>
+          <p class="form-privacy">🔒 Seus dados estão seguros. Não enviamos spam.</p>
+        </form>
+        <div id="form-success">
+          <div class="success-emoji">🎉</div>
+          <div class="success-msg">Recebemos! Vamos te chamar no WhatsApp em instantes.</div>
+        </div>
+        <div id="form-error">Erro ao enviar. Verifique sua conexão e tente novamente.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- remaining sections go here -->
 
   <script>
+    /* ── BRAND COLORS ───────────────────────────────── */
+    const COLORS = ['#01a1e1', '#ffd900', '#f01600', '#45b227'];
+
+    /* ── LEVEL DATA ─────────────────────────────────── */
+    const LEVELS = [
+      {
+        key: 'starter', label: 'STARTER', age: '6 a 8 anos',
+        color: '#01a1e1',
+        tagline: 'Primeiros passos no universo da robótica',
+        skills: ['Lógica básica', 'Montagem guiada', 'Coordenação motora'],
+        icon: '🚀',
+      },
+      {
+        key: 'builder', label: 'BUILDER', age: '8 a 10 anos',
+        color: '#f01600',
+        tagline: 'Construção de máquinas e mecanismos',
+        skills: ['Engrenagens', 'Sensores básicos', 'Pensamento lógico'],
+        icon: '🔧',
+      },
+      {
+        key: 'programmer', label: 'PROGRAMMER', age: '10 a 13 anos',
+        color: '#45b227',
+        tagline: 'Programa robôs e dá vida às ideias',
+        skills: ['Programação por blocos', 'Algoritmos', 'Resolução de problemas'],
+        icon: '💻',
+      },
+      {
+        key: 'designer', label: 'DESIGNER', age: '13 a 16 anos',
+        color: '#ffd900',
+        tagline: 'Cria projetos próprios do zero',
+        skills: ['Design de produto', 'IoT', 'Pensamento criativo'],
+        icon: '🎨',
+      },
+    ];
+
+    /* ── renderComicTitle ───────────────────────────── */
+    function renderComicTitle(el) {
+      const mode = el.dataset.comic || 'byWord';
+      const text = el.dataset.text || el.textContent.trim();
+      el.textContent = '';
+
+      if (mode === 'byChar') {
+        let ci = 0;
+        text.split('').forEach(ch => {
+          if (ch === ' ') { el.appendChild(document.createTextNode(' ')); return; }
+          const s = document.createElement('span');
+          s.textContent = ch;
+          s.style.color = COLORS[ci % 4];
+          ci++;
+          el.appendChild(s);
+        });
+      } else {
+        let wi = 0;
+        text.split(/(\s+)/).forEach(token => {
+          if (/^\s+$/.test(token)) { el.appendChild(document.createTextNode(' ')); return; }
+          const s = document.createElement('span');
+          s.textContent = token;
+          s.style.color = COLORS[wi % 4];
+          wi++;
+          el.appendChild(s);
+        });
+      }
+    }
+
+    /* ── initCarousel ───────────────────────────────── */
+    function initCarousel(container) {
+      if (!container) return;
+      const track  = container.querySelector('.carousel-track');
+      const items  = container.querySelectorAll('.carousel-item');
+      const dots   = container.querySelectorAll('.carousel-dot');
+      const prev   = container.querySelector('.carousel-prev');
+      const next   = container.querySelector('.carousel-next');
+      const total  = items.length;
+      let current  = 0;
+
+      function goTo(i) {
+        current = ((i % total) + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+      }
+
+      prev?.addEventListener('click', () => goTo(current - 1));
+      next?.addEventListener('click', () => goTo(current + 1));
+      dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+      let startX = 0;
+      track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - startX;
+        if (dx > 40) goTo(current - 1);
+        else if (dx < -40) goTo(current + 1);
+      });
+
+      goTo(0);
+    }
+
+    function initHeroForm() {
+      const form    = document.getElementById('hero-form');
+      const btn     = document.getElementById('form-btn');
+      const success = document.getElementById('form-success');
+      const errEl   = document.getElementById('form-error');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nome     = form.elements.nome.value.trim();
+        const telefone = form.elements.telefone.value.trim();
+        if (!nome || !telefone) return;
+
+        btn.textContent = 'Enviando…';
+        btn.disabled    = true;
+        errEl.style.display = 'none';
+
+        try {
+          const res = await fetch('https://n8nwebhook.artificialmenteia.com/webhook/cadastro', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome, telefone }),
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          form.style.display    = 'none';
+          success.style.display = 'block';
+        } catch {
+          errEl.style.display = 'block';
+          btn.innerHTML = 'TRANSFORMAR O FUTURO DO MEU FILHO<div class="big-cta-sub">grátis · sem compromisso</div>';
+          btn.disabled  = false;
+        }
+      });
+    }
+
+    function initVideoClick() {
+      const frame  = document.getElementById('video-frame');
+      const playEl = document.getElementById('video-play-btn');
+      const iframe = document.getElementById('video-iframe');
+
+      frame.addEventListener('click', () => {
+        if (iframe.style.display === 'block') return;
+        frame.querySelector('.video-thumb').style.display    = 'none';
+        frame.querySelector('.video-overlay').style.display  = 'none';
+        playEl.style.display    = 'none';
+        frame.querySelector('.video-caption').style.display  = 'none';
+        iframe.style.display    = 'block';
+        // iframe.src = 'URL_DO_VIDEO_AQUI'; // preencher após entrega
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('[data-comic]').forEach(renderComicTitle);
+      initHeroForm();
+      initVideoClick();
     });
   </script>
 </body>
