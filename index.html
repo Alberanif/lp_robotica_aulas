@@ -32,6 +32,173 @@
     button { font-family: inherit; cursor: pointer; }
     a { text-decoration: none; }
 
+    /* ── COMIC TITLE ────────────────────────────────── */
+    .comic-title {
+      font-family: 'Fredoka', system-ui, sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      -webkit-text-stroke: var(--ct-stroke, 2px) var(--ink);
+      paint-order: stroke fill;
+      text-align: center;
+      line-height: var(--ct-lh, 1.05);
+      letter-spacing: 0.005em;
+      font-size: var(--ct-size, 28px);
+    }
+    .comic-title span { display: inline-block; }
+
+    /* ── HARD CARD ──────────────────────────────────── */
+    .hard-card {
+      background: var(--card-bg, #fff);
+      border: 3px solid var(--ink);
+      border-radius: var(--card-radius, 22px);
+      padding: var(--card-pad, 16px);
+      box-shadow: 8px 8px 0 var(--shadow-color, var(--ink));
+      position: relative;
+    }
+
+    /* ── TAPE ───────────────────────────────────────── */
+    .tape {
+      position: absolute;
+      height: 22px;
+      background: rgba(255, 217, 0, 0.85);
+      border: 2px solid var(--ink);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    /* ── PILL ───────────────────────────────────────── */
+    .pill {
+      display: inline-block;
+      background: var(--pill-bg, var(--green));
+      color: var(--pill-color, #fff);
+      padding: 3px 12px;
+      border: 2.5px solid var(--ink);
+      border-radius: 10px;
+      box-shadow: 3px 3px 0 var(--ink);
+      font-weight: 800;
+      font-size: 14px;
+      transform: rotate(var(--pill-tilt, -1.5deg));
+      margin: 0 2px;
+      white-space: nowrap;
+    }
+
+    /* ── BIG CTA ────────────────────────────────────── */
+    .big-cta {
+      display: block;
+      width: 100%;
+      background: var(--cta-bg, var(--green));
+      border: 3.5px solid var(--ink);
+      border-radius: 18px;
+      padding: 16px 18px 14px;
+      box-shadow: 8px 8px 0 var(--cta-shadow, var(--ink));
+      text-align: center;
+      color: #fff;
+      font-family: 'Fredoka', system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      -webkit-text-stroke: 1.4px var(--ink);
+      paint-order: stroke fill;
+      transition: transform 90ms ease, box-shadow 90ms ease;
+    }
+    .big-cta:active {
+      transform: translate(8px, 8px);
+      box-shadow: 0 0 0 var(--cta-shadow, var(--ink));
+    }
+    .big-cta-sub {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      -webkit-text-stroke: 0;
+      opacity: 0.95;
+      margin-top: 4px;
+    }
+
+    /* ── FORM FIELDS ────────────────────────────────── */
+    .field-group { display: flex; flex-direction: column; gap: 6px; }
+    .field-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+    }
+    .field-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2.5px solid var(--ink);
+      border-radius: 12px;
+      background: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      outline: none;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    /* ── CAROUSEL ───────────────────────────────────── */
+    .carousel-wrap { overflow: hidden; }
+    .carousel-track {
+      display: flex;
+      transition: transform 320ms cubic-bezier(.2, .8, .2, 1);
+    }
+    .carousel-item { flex: 0 0 100%; padding: 8px 4px; }
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 18px 0 22px;
+    }
+    .carousel-dots { display: flex; gap: 8px; }
+    .carousel-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      padding: 0;
+      border: 2px solid var(--ink);
+      background: #fff;
+      cursor: pointer;
+    }
+    .carousel-dot.active { background: var(--dot-active-color, var(--blue)); }
+    .nav-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2.5px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── STAMP ──────────────────────────────────────── */
+    .stamp {
+      display: inline-block;
+      border: 3px solid var(--stamp-color, var(--red));
+      border-radius: 14px;
+      padding: 8px 18px;
+      box-shadow: 4px 4px 0 var(--stamp-color, var(--red));
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--stamp-color, var(--red));
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
+      line-height: 1.1;
+      background: #fff;
+    }
+
   </style>
 </head>
 <body>
