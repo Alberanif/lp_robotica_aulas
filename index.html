@@ -618,6 +618,85 @@
       text-transform: uppercase; margin-top: 2px;
     }
 
+    /* ── GALLERY ────────────────────────────────────── */
+    #gallery {
+      padding: 36px 22px 48px;
+      text-align: center;
+      background: var(--bg);
+    }
+    #gallery .comic-title { --ct-size: 28px; margin-bottom: 30px; }
+    .gallery-img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-card { --card-pad: 0; --card-radius: 20px; overflow: hidden; }
+    .gallery-desktop { display: none; }
+    .gallery-desktop-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
+    /* ── LOCATION ───────────────────────────────────── */
+    #location {
+      padding: 36px 22px 48px;
+      text-align: center;
+      background: var(--bg);
+    }
+    #location .comic-title { --ct-size: 24px; }
+    .location-pitch { margin: 24px 0; font-weight: 600; font-size: 14.5px; line-height: 1.5; color: var(--ink); }
+    .location-grid { display: flex; flex-direction: column; gap: 24px; }
+    .unit-label { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+    .unit-name { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 17px; color: var(--ink); text-transform: uppercase; letter-spacing: 0.02em; }
+    .unit-dots { display: flex; gap: 6px; }
+    .unit-dot { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--ink); }
+    .unit-photo { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border: 2.5px solid var(--ink); border-radius: 12px; margin-bottom: 12px; display: block; }
+    .map-area {
+      position: relative;
+      aspect-ratio: 4 / 4.2;
+      background: #eaf3fb;
+      background-image: radial-gradient(rgba(1,161,225,0.2) 1.2px, transparent 1.2px);
+      background-size: 12px 12px;
+      border-bottom: 3px solid var(--ink);
+      border-radius: 17px 17px 0 0;
+      overflow: hidden;
+    }
+    .map-addr-card {
+      position: absolute; top: 14px; left: 14px; right: 14px;
+      background: #fff; border: 2.5px solid var(--ink); border-radius: 12px;
+      padding: 12px 14px; box-shadow: 4px 4px 0 var(--ink); text-align: left; z-index: 2;
+    }
+    .map-addr-title { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 16px; color: var(--ink); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 4px; }
+    .map-addr-text { font-weight: 600; font-size: 12.5px; color: var(--ink); line-height: 1.4; margin-bottom: 10px; }
+    .map-addr-btn {
+      background: var(--blue); color: #fff;
+      border: 2.5px solid var(--ink); border-radius: 10px;
+      padding: 8px 14px; font-weight: 800; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      box-shadow: 3px 3px 0 var(--ink);
+      -webkit-text-stroke: 0.6px var(--ink); paint-order: stroke fill;
+      display: inline-block;
+    }
+    .map-pin { position: absolute; bottom: 60px; right: 60px; width: 28px; height: 28px; border-radius: 50%; background: var(--red); border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); display: flex; align-items: center; justify-content: center; }
+    .map-pin-dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+    .location-notice { margin-top: 32px; }
+    .notice-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--yellow); border: 2.5px solid var(--ink); display: flex; align-items: center; justify-content: center; font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 22px; color: var(--ink); }
+    .notice-text { font-size: 13.5px; line-height: 1.5; font-weight: 600; color: var(--ink); }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    #footer { background: var(--blue); border-top: 3px solid var(--ink); padding: 44px 22px 36px; text-align: center; color: #fff; }
+    .footer-logo-card { display: inline-block; background: #fff; border: 3px solid var(--ink); border-radius: 18px; padding: 12px; box-shadow: 6px 6px 0 var(--ink); margin-bottom: 14px; }
+    .footer-social-title { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.02em; text-transform: uppercase; -webkit-text-stroke: 1.2px var(--ink); paint-order: stroke fill; margin-bottom: 18px; }
+    .footer-social-btns { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; color: #fff; border: 2.5px solid var(--ink); border-radius: 999px; padding: 12px 22px; font-weight: 800; font-size: 14px; box-shadow: 4px 4px 0 var(--ink); -webkit-text-stroke: 0.6px var(--ink); paint-order: stroke fill; width: 100%; max-width: 240px; }
+    .social-icon { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 2px solid var(--ink); display: inline-flex; align-items: center; justify-content: center; font-size: 12px; color: var(--ink); }
+    .footer-address-title { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 16px; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 6px; -webkit-text-stroke: 1px var(--ink); paint-order: stroke fill; }
+    .footer-address-text { font-weight: 600; font-size: 13.5px; line-height: 1.5; }
+    .footer-divider { border-top: 1px solid rgba(255,255,255,0.4); margin: 24px 0 18px; }
+    .footer-copy { margin-top: 20px; font-size: 11px; font-weight: 700; opacity: 0.85; letter-spacing: 0.04em; }
+
   </style>
 </head>
 <body>
@@ -819,7 +898,126 @@
     </div>
   </section>
 
-  <!-- remaining sections go here -->
+  <section id="gallery">
+    <h2 class="comic-title" data-comic="byWord" data-text="CONHEÇA UM POUCO DAS NOSSAS AULAS"></h2>
+
+    <div id="gallery-carousel">
+      <div class="carousel-wrap">
+        <div class="carousel-track">
+          <div class="carousel-item">
+            <div class="hard-card gallery-card">
+              <img src="images/gallery-1.jpg" alt="Aula de robótica" class="gallery-img" loading="lazy" width="360" height="450">
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="hard-card gallery-card">
+              <img src="images/gallery-2.jpg" alt="Aula de robótica" class="gallery-img" loading="lazy" width="360" height="450">
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="hard-card gallery-card">
+              <img src="images/gallery-3.jpg" alt="Aula de robótica" class="gallery-img" loading="lazy" width="360" height="450">
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="hard-card gallery-card">
+              <img src="images/gallery-4.jpg" alt="Aula de robótica" class="gallery-img" loading="lazy" width="360" height="450">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="nav-btn carousel-prev">‹</button>
+        <div class="carousel-dots">
+          <button class="carousel-dot active"></button>
+          <button class="carousel-dot"></button>
+          <button class="carousel-dot"></button>
+          <button class="carousel-dot"></button>
+        </div>
+        <button class="nav-btn carousel-next">›</button>
+      </div>
+    </div>
+
+    <div class="gallery-desktop">
+      <div class="gallery-desktop-grid">
+        <div class="hard-card gallery-card">
+          <img src="images/gallery-1.jpg" alt="Aula de robótica" class="gallery-img" loading="lazy" width="360" height="450">
+        </div>
+        <div class="hard-card gallery-card">
+          <img src="images/gallery-2.jpg" alt="Aula de robótica" class="gallery-img" loading="lazy" width="360" height="450">
+        </div>
+        <div class="hard-card gallery-card">
+          <img src="images/gallery-3.jpg" alt="Aula de robótica" class="gallery-img" loading="lazy" width="360" height="450">
+        </div>
+        <div class="hard-card gallery-card">
+          <img src="images/gallery-4.jpg" alt="Aula de robótica" class="gallery-img" loading="lazy" width="360" height="450">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="location">
+    <h2 class="comic-title" data-comic="byWord" data-text="ESTAMOS MAIS PERTO DE VOCÊ DO QUE IMAGINA"></h2>
+
+    <p class="location-pitch">Acabamos de inaugurar a nossa nova unidade no centro de Brasília, pensando no seu conforto e na facilidade.</p>
+    <p class="location-pitch" style="margin-top:0;">
+      E estamos em uma <span class="pill" style="--pill-tilt:-1.5deg;">localização estratégica</span> para garantir a máxima proximidade da sua casa ou do seu trabalho.
+    </p>
+
+    <div class="location-grid">
+      <div class="hard-card" style="--shadow-color:var(--blue); --card-radius:20px; --card-pad:14px; position:relative;">
+        <div class="tape" style="width:68px; top:-12px; left:50%; transform:translateX(-50%) rotate(4deg);"></div>
+        <img src="images/sala.jpg" alt="Unidade Asa Norte" class="unit-photo" loading="lazy" width="400" height="320">
+        <div class="unit-label">
+          <div class="unit-name">UNIDADE ASA NORTE</div>
+          <div class="unit-dots">
+            <div class="unit-dot" style="background:var(--red);"></div>
+            <div class="unit-dot" style="background:var(--yellow);"></div>
+            <div class="unit-dot" style="background:var(--green);"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hard-card" style="--shadow-color:var(--red); --card-radius:20px; --card-pad:0; overflow:hidden;">
+        <div class="map-area">
+          <div class="map-addr-card">
+            <div class="map-addr-title">ROBÓTICA BSB</div>
+            <div class="map-addr-text">CLN 302 Bloco B, Sala 113<br>Asa Norte, Brasília DF</div>
+            <a href="https://maps.google.com/?q=CLN+302+Bloco+B+Sala+113+Asa+Norte+Brasília+DF" target="_blank" rel="noopener" class="map-addr-btn">COMO CHEGAR</a>
+          </div>
+          <div class="map-pin"><div class="map-pin-dot"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hard-card location-notice" style="display:flex; gap:12px; align-items:flex-start; text-align:left; margin-top:32px;">
+      <div class="notice-icon">!</div>
+      <div class="notice-text">Nossa sala fica no mesmo prédio do <strong>restaurante Greens</strong>. A entrada é por uma porta de vidro que fica na parte de trás do prédio.</div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-logo-card">
+      <img src="images/logo.svg" alt="Robótica BSB" width="70" height="70">
+    </div>
+
+    <div class="footer-social-title">SIGA E FALE CONOSCO</div>
+    <div class="footer-social-btns">
+      <a href="https://instagram.com/roboticabsb" target="_blank" rel="noopener" class="social-btn" style="background:#e1306c;">
+        <span class="social-icon">📷</span> Instagram
+      </a>
+      <a href="https://wa.me/5561999999999" target="_blank" rel="noopener" class="social-btn" style="background:var(--green);">
+        <span class="social-icon">✆</span> WhatsApp
+      </a>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-address-title">📍 ONDE ESTAMOS</div>
+    <div class="footer-address-text">CLN 302 Bloco B, Sala 113<br>Asa Norte, Brasília DF</div>
+
+    <div class="footer-copy">© 2026 Robótica BSB. Todos os direitos reservados.</div>
+  </footer>
 
   <script>
     /* ── BRAND COLORS ───────────────────────────────── */
@@ -1042,6 +1240,7 @@
       initFlippingCalendar();
       initCarousel(document.getElementById('schedule-carousel'));
       initEvolution();
+      initCarousel(document.getElementById('gallery-carousel'));
     });
   </script>
 </body>
