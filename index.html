@@ -477,7 +477,8 @@
     /* ── renderComicTitle ───────────────────────────── */
     function renderComicTitle(el) {
       const mode = el.dataset.comic || 'byWord';
-      const text = el.dataset.text || el.textContent.trim();
+      const text = (el.dataset.text || el.textContent.trim()).trim();
+      if (!text) return;
       el.textContent = '';
 
       if (mode === 'byChar') {
@@ -486,17 +487,17 @@
           if (ch === ' ') { el.appendChild(document.createTextNode(' ')); return; }
           const s = document.createElement('span');
           s.textContent = ch;
-          s.style.color = COLORS[ci % 4];
+          s.style.color = COLORS[ci % COLORS.length];
           ci++;
           el.appendChild(s);
         });
       } else {
         let wi = 0;
         text.split(/(\s+)/).forEach(token => {
-          if (/^\s+$/.test(token)) { el.appendChild(document.createTextNode(' ')); return; }
+          if (/^\s+$/.test(token)) { el.appendChild(document.createTextNode(token)); return; }
           const s = document.createElement('span');
           s.textContent = token;
-          s.style.color = COLORS[wi % 4];
+          s.style.color = COLORS[wi % COLORS.length];
           wi++;
           el.appendChild(s);
         });
@@ -512,6 +513,7 @@
       const prev   = container.querySelector('.carousel-prev');
       const next   = container.querySelector('.carousel-next');
       const total  = items.length;
+      if (total === 0) return;
       let current  = 0;
 
       function goTo(i) {
@@ -540,29 +542,44 @@
       const btn     = document.getElementById('form-btn');
       const success = document.getElementById('form-success');
       const errEl   = document.getElementById('form-error');
+      const origBtnHTML = btn.innerHTML;
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const nome     = form.elements.nome.value.trim();
         const telefone = form.elements.telefone.value.trim();
-        if (!nome || !telefone) return;
+
+        if (!nome || !telefone) {
+          errEl.textContent = 'Por favor, preencha todos os campos.';
+          errEl.style.display = 'block';
+          return;
+        }
 
         btn.textContent = 'Enviando…';
         btn.disabled    = true;
         errEl.style.display = 'none';
+
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
 
         try {
           const res = await fetch('https://n8nwebhook.artificialmenteia.com/webhook/cadastro', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nome, telefone }),
+            signal: controller.signal,
           });
+          clearTimeout(timeout);
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           form.style.display    = 'none';
           success.style.display = 'block';
-        } catch {
+        } catch (err) {
+          clearTimeout(timeout);
+          errEl.textContent = err.name === 'AbortError'
+            ? 'Conexão expirou. Tente novamente.'
+            : 'Erro ao enviar. Verifique sua conexão e tente novamente.';
           errEl.style.display = 'block';
-          btn.innerHTML = 'TRANSFORMAR O FUTURO DO MEU FILHO<div class="big-cta-sub">grátis · sem compromisso</div>';
+          btn.innerHTML = origBtnHTML;
           btn.disabled  = false;
         }
       });
