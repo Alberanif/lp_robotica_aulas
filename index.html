@@ -222,6 +222,8 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
     .topnav-logo { width: 28px; height: 28px; object-fit: contain; }
     #topnav .comic-title {
@@ -259,28 +261,52 @@
       margin: 0 0 32px;
       text-wrap: pretty;
     }
-    .hero-video-col { position: relative; margin-bottom: 28px; }
+    .hero-video-col {
+      position: relative;
+      margin-bottom: 28px;
+      isolation: isolate;
+    }
     .video-frame {
       position: relative;
-      background: #1a1a1a;
       border: 3.5px solid var(--ink);
       border-radius: 22px;
-      overflow: hidden;
+      overflow: visible;
+      background: #1a1a1a;
       max-width: 360px;
       margin: 0 auto;
       box-shadow: 9px 9px 0 var(--red);
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      contain: layout paint;
+    }
+    .video-clip {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #1a1a1a;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      contain: paint;
+      isolation: isolate;
     }
     .video-frame wistia-player {
       display: block;
       width: 100%;
+      aspect-ratio: 9 / 16;
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
     .video-frame wistia-player[media-id='9vzakjxig7']:not(:defined) {
-      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/9vzakjxig7/swatch');
-      filter: blur(5px);
-      padding-top: 177.78%;
+      background: center / cover no-repeat url('https://fast.wistia.com/embed/medias/9vzakjxig7/swatch');
     }
     .video-frame .wistia_preload_transcript_outer_wrapper {
       display: none !important;
+    }
+    .video-frame iframe,
+    .video-frame video,
+    .video-frame canvas {
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
     .hero-form-col .hard-card { --shadow-color: var(--blue); --card-radius: 22px; --card-pad: 18px; }
     .form-title {
@@ -998,7 +1024,9 @@
 
     <div class="hero-video-col">
       <div class="video-frame" id="video-frame">
-        <wistia-player media-id="9vzakjxig7" aspect="0.5625"></wistia-player>
+        <div class="video-clip">
+          <wistia-player media-id="9vzakjxig7" aspect="0.5625"></wistia-player>
+        </div>
       </div>
     </div>
 
