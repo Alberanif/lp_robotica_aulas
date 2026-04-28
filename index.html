@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Robótica BSB — Inscrições Abertas</title>
+  <link rel="icon" href="images/Logo - Robótica BSB.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fast.wistia.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link
     rel="stylesheet"
@@ -14,8 +16,6 @@
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""
   >
-  <script src="https://fast.wistia.com/player.js" async></script>
-  <script src="https://fast.wistia.com/embed/9vzakjxig7.js" async type="module"></script>
   <style>
 
     /* ── VARIABLES ──────────────────────────────────── */
@@ -270,7 +270,7 @@
       position: relative;
       border: 3.5px solid var(--ink);
       border-radius: 22px;
-      overflow: visible;
+      overflow: hidden;
       background: #1a1a1a;
       max-width: 360px;
       margin: 0 auto;
@@ -289,15 +289,40 @@
       contain: paint;
       isolation: isolate;
     }
-    .video-frame wistia-player {
-      display: block;
+    .video-shell {
+      position: relative;
       width: 100%;
       aspect-ratio: 9 / 16;
+      background: #1a1a1a;
+    }
+    .video-poster {
+      position: absolute;
+      inset: 0;
+      background: center / cover no-repeat url('https://fast.wistia.com/embed/medias/9vzakjxig7/swatch');
+      z-index: 2;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 180ms ease;
+      pointer-events: none;
+    }
+    .video-frame wistia-player {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
       transform: translateZ(0);
       backface-visibility: hidden;
     }
-    .video-frame wistia-player[media-id='9vzakjxig7']:not(:defined) {
-      background: center / cover no-repeat url('https://fast.wistia.com/embed/medias/9vzakjxig7/swatch');
+    .video-frame.is-ready wistia-player {
+      opacity: 1;
+      visibility: visible;
+    }
+    .video-frame.is-ready .video-poster {
+      opacity: 0;
+      visibility: hidden;
     }
     .video-frame .wistia_preload_transcript_outer_wrapper {
       display: none !important;
@@ -1025,7 +1050,10 @@
     <div class="hero-video-col">
       <div class="video-frame" id="video-frame">
         <div class="video-clip">
-          <wistia-player media-id="9vzakjxig7" aspect="0.5625"></wistia-player>
+          <div class="video-shell">
+            <div class="video-poster" aria-hidden="true"></div>
+            <wistia-player media-id="9vzakjxig7" aspect="0.5625"></wistia-player>
+          </div>
         </div>
       </div>
     </div>
@@ -1436,6 +1464,86 @@
       goTo(0);
     }
 
+    function initWistiaEmbed() {
+      const videoFrame = document.getElementById('video-frame');
+      const player = videoFrame?.querySelector('wistia-player');
+      const mediaId = player?.getAttribute('media-id');
+      if (!videoFrame || !player || !mediaId) return;
+
+      const scripts = [
+        'https://fast.wistia.com/player.js',
+        `https://fast.wistia.com/embed/${mediaId}.js`,
+      ];
+
+      function ensureScript(src) {
+        return new Promise((resolve, reject) => {
+          const existing = document.querySelector(`script[src="${src}"]`);
+          if (existing) {
+            if (existing.dataset.loaded === 'true') {
+              resolve();
+              return;
+            }
+            existing.addEventListener('load', resolve, { once: true });
+            existing.addEventListener('error', reject, { once: true });
+            return;
+          }
+
+          const script = document.createElement('script');
+          script.src = src;
+          script.async = true;
+          script.addEventListener('load', () => {
+            script.dataset.loaded = 'true';
+            resolve();
+          }, { once: true });
+          script.addEventListener('error', reject, { once: true });
+          document.head.appendChild(script);
+        });
+      }
+
+      function revealPlayer() {
+        if (videoFrame.classList.contains('is-ready')) return;
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            videoFrame.classList.add('is-ready');
+          });
+        });
+      }
+
+      Promise.all(scripts.map(ensureScript))
+        .then(() => customElements.whenDefined('wistia-player'))
+        .then(() => {
+          const revealOnStablePaint = () => {
+            if (player.offsetWidth > 0 && player.offsetHeight > 0) {
+              revealPlayer();
+              return true;
+            }
+            return false;
+          };
+
+          if (revealOnStablePaint()) return;
+
+          const observer = new MutationObserver(() => {
+            if (revealOnStablePaint()) {
+              observer.disconnect();
+            }
+          });
+
+          observer.observe(player, {
+            attributes: true,
+            childList: true,
+            subtree: true,
+          });
+
+          window.setTimeout(() => {
+            observer.disconnect();
+            revealPlayer();
+          }, 2500);
+        })
+        .catch(() => {
+          videoFrame.classList.remove('is-ready');
+        });
+    }
+
     function initHeroForm() {
       const form    = document.getElementById('hero-form');
       const btn     = document.getElementById('form-btn');
@@ -1600,6 +1708,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('[data-comic]').forEach(renderComicTitle);
+      initWistiaEmbed();
       initHeroForm();
       initFlippingCalendar();
       initCarousel(document.getElementById('schedule-carousel'));
