@@ -1070,7 +1070,7 @@
             </div>
             <div class="field-group">
               <label class="field-label" for="field-tel">Telefone / WhatsApp</label>
-              <input class="field-input" type="tel" id="field-tel" name="telefone" placeholder="(61) 99999-9999" required>
+              <input class="field-input" type="tel" id="field-tel" name="telefone" placeholder="(61) 99999-9999" inputmode="numeric" maxlength="15" required>
             </div>
           </div>
           <div style="margin-top:4px;">
@@ -1461,19 +1461,43 @@
     }
 
     function initHeroForm() {
-      const form    = document.getElementById('hero-form');
-      const btn     = document.getElementById('form-btn');
-      const success = document.getElementById('form-success');
-      const errEl   = document.getElementById('form-error');
+      const form     = document.getElementById('hero-form');
+      const btn      = document.getElementById('form-btn');
+      const success  = document.getElementById('form-success');
+      const errEl    = document.getElementById('form-error');
+      const telInput = document.getElementById('field-tel');
       const origBtnHTML = btn.innerHTML;
+
+      // Máscara: (DDD) NNNNN-NNNN — somente dígitos
+      telInput.addEventListener('input', () => {
+        const digits = telInput.value.replace(/\D/g, '').slice(0, 11);
+        let v = '';
+        if (digits.length > 0) {
+          v = '(' + digits.slice(0, 2);
+          if (digits.length > 2) v += ') ' + digits.slice(2, 7);
+          if (digits.length > 7) v += '-' + digits.slice(7, 11);
+        }
+        telInput.value = v;
+      });
+
+      telInput.addEventListener('keydown', (e) => {
+        const ctrl = e.ctrlKey || e.metaKey;
+        const nav  = ['Backspace','Delete','ArrowLeft','ArrowRight','Tab','Home','End'].includes(e.key);
+        if (!nav && !ctrl && !/^\d$/.test(e.key)) e.preventDefault();
+      });
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const nome     = form.elements.nome.value.trim();
-        const telefone = form.elements.telefone.value.trim();
+        const telefone = form.elements.telefone.value.replace(/\D/g, '');
 
-        if (!nome || !telefone) {
-          errEl.textContent = 'Por favor, preencha todos os campos.';
+        if (!nome) {
+          errEl.textContent = 'Por favor, preencha o nome do responsável.';
+          errEl.style.display = 'block';
+          return;
+        }
+        if (telefone.length < 11) {
+          errEl.textContent = 'Informe um telefone válido com DDD (11 dígitos).';
           errEl.style.display = 'block';
           return;
         }
