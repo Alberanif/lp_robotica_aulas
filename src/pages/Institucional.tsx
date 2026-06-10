@@ -5,13 +5,8 @@ const Footer = lazy(() => import("@/components/landing/Footer"));
 import professorLego from "@/assets/professor-lego.webp";
 import LegoArrow from "@/components/landing/LegoArrow";
 import metodologiaEvolucao from "@/assets/metodologia-evolucao-recortada.webp";
-import metodologiaAulas from "@/assets/metodologia-aulas.webp";
-import acompanhamentoIndividualizado from "@/assets/acompanhamento-individualizado.webp";
-import formacaoIntegral from "@/assets/formacao-integral.webp";
-import professoresApaixonados from "@/assets/professores-apaixonados.webp";
-import parceriasFlexiveis from "@/assets/parcerias-flexiveis.webp";
-import materiaisLegoEducation from "@/assets/materiais-lego-education.webp";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+const DiferenciaisSection = lazy(() => import("@/components/institucional/DiferenciaisSection"));
 
 const NEO_BTN = "uppercase font-bold border-[3px] border-[#111111] rounded-2xl shadow-[4px_4px_0px_#111111] hover:-translate-y-[2px] hover:shadow-[6px_6px_0px_#111111] transition-[transform,box-shadow] duration-150 cursor-pointer";
 
@@ -489,19 +484,9 @@ const Institucional = () => {
               <div className="border-[4px] border-[#111111] rounded-2xl shadow-[14px_14px_0px_#01a1e1] bg-white p-8 md:p-12 min-h-[520px] flex flex-col">
                 {/* Imagem */}
                 <div className="relative rounded-xl mb-6 w-full aspect-[4/3] overflow-hidden border-[3px] border-[#111111] flex items-center justify-center bg-[#faefd9]">
-                  {currentDifferential === 0 ? (
-                    <img src={metodologiaAulas} alt="Metodologia de ensino progressiva" className="w-full h-full object-contain" loading="lazy" decoding="async" />
-                  ) : currentDifferential === 1 ? (
-                    <img src={materiaisLegoEducation} alt="Materiais LEGO® Education" className="w-full h-full object-contain" loading="lazy" decoding="async" />
-                  ) : currentDifferential === 2 ? (
-                    <img src={acompanhamentoIndividualizado} alt="Acompanhamento individualizado" className="w-full h-full object-contain" loading="lazy" decoding="async" />
-                  ) : currentDifferential === 3 ? (
-                    <img src={formacaoIntegral} alt="Formação integral" className="w-full h-full object-contain" loading="lazy" decoding="async" />
-                  ) : currentDifferential === 4 ? (
-                    <img src={parceriasFlexiveis} alt="Parcerias flexíveis" className="w-full h-full object-contain" loading="lazy" decoding="async" />
-                  ) : (
-                    <img src={professoresApaixonados} alt="Professores apaixonados" className="w-full h-full object-contain" loading="lazy" decoding="async" />
-                  )}
+                  <Suspense fallback={<div className="w-full h-full bg-[#faefd9] animate-pulse rounded-xl" />}>
+                    <DiferenciaisSection currentDifferential={currentDifferential} />
+                  </Suspense>
 
                   {/* Botão Prev */}
                   <button
