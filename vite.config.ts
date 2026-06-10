@@ -4,6 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import viteCompression from "vite-plugin-compression";
 import { imagetools } from "vite-imagetools";
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -15,6 +16,32 @@ export default defineConfig(({ mode }) => ({
     react(),
     imagetools(),
     mode === "development" && componentTagger(),
+    mode === "production" && VitePWA({
+      registerType: "autoUpdate",
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,webp,woff2}"],
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/i\.ytimg\.com\/.*/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "youtube-thumbnails",
+              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 30 },
+            },
+          },
+        ],
+      },
+      manifest: {
+        name: "Robótica BSB",
+        short_name: "Robótica BSB",
+        theme_color: "#ffd900",
+        background_color: "#ffffff",
+        display: "browser",
+        icons: [
+          { src: "/favicon.ico", sizes: "any", type: "image/x-icon" },
+        ],
+      },
+    }),
     mode === "production" && viteCompression({ algorithm: "gzip", threshold: 1024 }),
   ].filter(Boolean),
   resolve: {
