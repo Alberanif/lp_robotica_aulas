@@ -50,11 +50,8 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
+    esbuildOptions: {
+      drop: ["console", "debugger"],
     },
     rollupOptions: {
       output: {

@@ -22,6 +22,7 @@ const propositoColors = ['#01a1e1', '#f01600', '#ffd900', '#45b227'];
 const Institucional = () => {
   const [currentDifferential, setCurrentDifferential] = useState(0);
   const [propositoIdx, setPropositoIdx] = useState(0);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const scrollDown = useCallback(() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' }), []);
   const scrollToValores = useCallback(() => document.getElementById('valores-section')?.scrollIntoView({ behavior: 'smooth' }), []);
@@ -223,15 +224,39 @@ const Institucional = () => {
             {/* Vídeo YouTube — estilo Shorts (9:16) */}
             <div className="relative mx-auto mb-8 w-full max-w-[320px] sm:max-w-[360px]">
               <div className="border-[4px] border-[#111111] rounded-[2rem] shadow-[12px_12px_0px_#01a1e1] overflow-hidden aspect-[9/16]">
-                <iframe
-                  className="w-full h-full"
-                  src="https://www.youtube.com/embed/oC9XI4Ja5IE"
-                  title="Robótica BSB - Condomínios"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
+                {!videoLoaded ? (
+                  <button
+                    onClick={() => setVideoLoaded(true)}
+                    className="relative w-full h-full cursor-pointer group border-0 p-0 bg-transparent"
+                    aria-label="Assistir vídeo da Robótica BSB"
+                  >
+                    <img
+                      src="https://i.ytimg.com/vi/oC9XI4Ja5IE/maxresdefault.jpg"
+                      alt="Vídeo Robótica BSB - Condomínios"
+                      className="w-full h-full object-cover"
+                      loading="eager"
+                      width={320}
+                      height={568}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/35 transition-colors duration-200">
+                      <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
+                        <svg viewBox="0 0 24 24" className="w-8 h-8 fill-white ml-1" aria-hidden="true">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </button>
+                ) : (
+                  <iframe
+                    className="w-full h-full"
+                    src="https://www.youtube.com/embed/oC9XI4Ja5IE?autoplay=1"
+                    title="Robótica BSB - Condomínios"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                )}
               </div>
             </div>
 

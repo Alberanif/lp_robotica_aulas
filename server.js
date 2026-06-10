@@ -9,17 +9,31 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const DIST = path.join(__dirname, "dist");
 
+const MIME_TYPES = {
+  ".js": "application/javascript",
+  ".css": "text/css",
+  ".html": "text/html",
+  ".json": "application/json",
+  ".svg": "image/svg+xml",
+  ".webp": "image/webp",
+  ".png": "image/png",
+  ".woff2": "font/woff2",
+};
+
 // Serve pre-compressed .gz files if available
 app.use((req, res, next) => {
   const acceptEncoding = req.headers["accept-encoding"] || "";
   if (!acceptEncoding.includes("gzip")) return next();
 
   const gzPath = path.join(DIST, req.path + ".gz");
-  if (fs.existsSync(gzPath)) {
-    res.setHeader("Content-Encoding", "gzip");
-    res.setHeader("Vary", "Accept-Encoding");
-    req.url = req.url + ".gz";
-  }
+  if (!gzPath.startsWith(DIST + path.sep)) return next();
+  if (!fs.existsSync(gzPath)) return next();
+
+  const ext = path.extname(req.path);
+  if (MIME_TYPES[ext]) res.setHeader("Content-Type", MIME_TYPES[ext]);
+  res.setHeader("Content-Encoding", "gzip");
+  res.setHeader("Vary", "Accept-Encoding");
+  req.url = req.url + ".gz";
   next();
 });
 

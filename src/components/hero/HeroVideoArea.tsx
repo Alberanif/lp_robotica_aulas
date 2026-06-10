@@ -30,7 +30,7 @@ export default function HeroVideoArea() {
               src={`https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`}
               alt="Thumbnail do vídeo Robótica BSB Condomínios"
               className="w-full h-full object-cover"
-              loading="lazy"
+              loading="eager"
               width={320}
               height={568}
             />
