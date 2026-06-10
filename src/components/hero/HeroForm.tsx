@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 
 function maskPhone(value: string): string {
@@ -23,23 +21,17 @@ export default function HeroForm() {
     setStatus("idle");
 
     try {
-      const response = await fetch("/api/cadastro", {
+      const WEBHOOK_URL = "https://n8nwebhook.artificialmenteia.com/webhook/cadastro";
+      const response = await fetch(WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome, celular }),
+        body: JSON.stringify({ nome, celular, origem: "Landing Page Robótica BSB", dataRegistro: new Date().toISOString() }),
       });
 
       if (response.ok) {
         setStatus("success");
         setNome("");
         setCelular("");
-
-        if (typeof window !== 'undefined' && 'fbq' in window) {
-          const customWindow = window as unknown as { fbq?: (type: string, eventName: string) => void };
-          if (typeof customWindow.fbq === 'function') {
-            customWindow.fbq('track', 'CompleteRegistration');
-          }
-        }
 
         // Retorna ao estado inicial após 3 segundos
         setTimeout(() => setStatus("idle"), 3000);
